@@ -28,7 +28,7 @@ public class ReaderInfoController {
 		model.addAttribute("manager", manager);
 		model.addAttribute("page", page);
 		model.addAttribute("rows", rows);
-		return "/jsp/reader/findReaderInfo.jsp";
+		return "reader/findReaderInfo";
 	}
 
 	/**

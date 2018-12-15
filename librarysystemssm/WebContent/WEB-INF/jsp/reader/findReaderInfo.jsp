@@ -3,9 +3,9 @@
 <html>
 <head>
 	<title>读者信息</title>
-	<jsp:include page="/link.jsp" />
+	<jsp:include page="/WEB-INF/jsp/link.jsp" />
 	<script type="text/javascript" src="${APP_PATH }/layer/layer.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/jsp/reader/findReaderInfo.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/script/findReaderInfo.js"></script>
 </head>
 <body class="easyui-layout">
    <!-- 该字段用于确定是否是管理员设置页面的请求 -->

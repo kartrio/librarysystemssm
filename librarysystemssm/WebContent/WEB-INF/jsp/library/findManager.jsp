@@ -3,9 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="/link.jsp" />
+<jsp:include page="/WEB-INF/jsp/link.jsp" />
 <script type="text/javascript" src="${APP_PATH }/layer/layer.js"></script>
-<script type="text/javascript" src="${APP_PATH }/jsp/library/findManager.js"></script>
+<script type="text/javascript" src="${APP_PATH }/script/findManager.js"></script>
 </head>
 <body class="easyui-layout">
     

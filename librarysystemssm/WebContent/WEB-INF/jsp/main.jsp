@@ -7,13 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Welcome</title>
 <link rel="stylesheet" href="${APP_PATH }/css/index.css"/>
-<jsp:include page="link.jsp"/>
-<script type="text/javascript" src="${APP_PATH }/index.js"></script>
+<jsp:include page="/WEB-INF/jsp/link.jsp"/>
+<script type="text/javascript" src="${APP_PATH }/script/index.js"></script>
 </head>
 <body class="easyui-layout">
 	<div data-options="region:'north'" 
 	style="height: 10%; overflow: hidden;background:linear-gradient(to right, #6495ED, #8DEEEE);">
-	  <jsp:include page="top.jsp"/>
+	  <jsp:include page="/WEB-INF/jsp/top.jsp"/>
 	</div>
 	
 	<div data-options="region:'west',split:true" style="width: 10%">
@@ -89,7 +89,7 @@
 	  </div>
 	</div>
 	<div data-options="region:'south'" style="height: 5%">
-	     <jsp:include page="/footer.jsp"/>
+	     <jsp:include page="/WEB-INF/jsp/footer.jsp"/>
 	</div>
 	<div data-options="region:'center',split:true">
 	   <div id="tab" class="easyui-tabs" style="width:100%;height:100%">

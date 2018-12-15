@@ -21,7 +21,7 @@ public class BookTypeController {
 	
 	@RequestMapping("/bookTypePage")
 	public String bookTypePage() {
-		return "/jsp/book/findBookType.jsp";
+		return "book/findBookType";
 	}
 
 	/**

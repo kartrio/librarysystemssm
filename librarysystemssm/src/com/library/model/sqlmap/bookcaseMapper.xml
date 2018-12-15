@@ -3,38 +3,34 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.library.model.sqlmap.bookcaseMapper">
-   
-    <!-- 获取书架信息 -->
-    <select id="getBookcase" resultType="Bookcase">
-        SELECT * FROM tb_bookcase
-        <where>
-           <if test="startRow != null and rows != null">
-           	LIMIT #{startRow},#{rows}
-           </if>
-        </where>
-    </select>
-    
-    <!-- 获取书架信息总数目 -->
-    <select id="getBookcaseCount" resultType="int">
-        SELECT COUNT(*) FROM tb_bookcase
-    </select>
-    <!-- 修改书架信息 
-                      使用map作为参数,其中_parameter代表传递的参数,如果有多个参数时,可以使用get(0)来获取
-    -->
-    <update id="updateBookcase" parameterType="Bookcase">
-          UPDATE tb_bookcase
-          SET name = #{name}
-          WHERE id = #{id}    
-    </update>
-    
-    <!-- 插入书架信息 -->
-    <insert id="insertBookcase" parameterType="Bookcase">
-          INSERT INTO tb_bookcase(name)
-          VALUES(#{name})
-    </insert>
-    
-    <!-- 删除书架信息 -->
-    <delete id="deleteBookcase" parameterType="int">
-          DELETE FROM tb_bookcase WHERE id = #{id}
-    </delete>
+
+	<!-- 获取书架信息 -->
+	<select id="getBookcase" resultType="Bookcase">
+		SELECT * FROM tb_bookcase
+		<if test="startRow != null and rows != null">
+			LIMIT #{startRow},#{rows}
+		</if>
+	</select>
+
+	<!-- 获取书架信息总数目 -->
+	<select id="getBookcaseCount" resultType="int">
+		SELECT COUNT(*) FROM tb_bookcase
+	</select>
+	<!-- 修改书架信息 使用map作为参数,其中_parameter代表传递的参数,如果有多个参数时,可以使用get(0)来获取 -->
+	<update id="updateBookcase" parameterType="Bookcase">
+		UPDATE tb_bookcase
+		SET name = #{name}
+		WHERE id = #{id}
+	</update>
+
+	<!-- 插入书架信息 -->
+	<insert id="insertBookcase" parameterType="Bookcase">
+		INSERT INTO tb_bookcase(name)
+		VALUES(#{name})
+	</insert>
+
+	<!-- 删除书架信息 -->
+	<delete id="deleteBookcase" parameterType="int">
+		DELETE FROM tb_bookcase WHERE id = #{id}
+	</delete>
 </mapper>

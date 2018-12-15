@@ -38,7 +38,7 @@ public class RegisterController {
 		} else {
 			model.addAttribute("readerTypeList", "");
 		}
-		return "/register.jsp";
+		return "register";
 	}
 
 	/**

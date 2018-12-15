@@ -5,10 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>图书借阅信息查询</title>
-<jsp:include page="/link.jsp" />
+<jsp:include page="/WEB-INF/jsp/link.jsp" />
 <script type="text/javascript" src="${APP_PATH }/layer/layer.js"></script>
 <script type="text/javascript"
-	src="${APP_PATH }/jsp/book/findBorrowInfo.js"></script>
+	src="${APP_PATH }/script/findBorrowInfo.js"></script>
 </head>
 <body id="layout" class="easyui-layout">
     <!-- 该字段用于判断请求的来源 -->

@@ -21,12 +21,12 @@ public class ManagerController {
 
 	@RequestMapping("/managerPage")
 	public String managerPage() {
-		return "/jsp/library/findManager.jsp";
+		return "library/findManager";
 	}
 
 	@RequestMapping("/findReader")
 	public String readerPage(){
-		return "/jsp/library/findReader.jsp";
+		return "library/findReader";
 	}
 	
 	@ResponseBody

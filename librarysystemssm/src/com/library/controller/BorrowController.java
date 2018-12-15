@@ -28,18 +28,18 @@ public class BorrowController {
 	
 	@RequestMapping("/borrowBookPage")
     public String borrowBookPage(){
-    	return "/jsp/borrow/borrowBook.jsp";
+    	return "borrow/borrowBook";
     }
 	
 	@RequestMapping("/borrowInfoPage")
     public String borrowInfoPage(Integer source, Model model){
 		model.addAttribute("source", source);
-    	return "/jsp/book/findBorrowInfo.jsp";
+    	return "book/findBorrowInfo";
     }
 	
 	@RequestMapping("/delBorrowInfoPage")
 	public String delBorrowInfoPage(){
-		return "/jsp/borrow/delBorrowInfo.jsp";
+		return "borrow/delBorrowInfo";
 	}
 	/**
 	 * 分页查询图书借阅信息

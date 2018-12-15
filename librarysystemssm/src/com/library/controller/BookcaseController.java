@@ -26,7 +26,7 @@ public class BookcaseController {
 	
 	@RequestMapping("/bookcasePage")
 	public String bookcasePage(){
-		return "/jsp/library/findBookcase.jsp";
+		return "library/findBookcase";
 	}
 	
 	/**

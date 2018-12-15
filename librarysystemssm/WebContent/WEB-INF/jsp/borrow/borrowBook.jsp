@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<jsp:include page="/link.jsp" />
+<jsp:include page="/WEB-INF/jsp/link.jsp" />
 <script type="text/javascript" src="${APP_PATH }/layer/layer.js"></script>
 <script type="text/javascript"
-	src="${APP_PATH }/jsp/borrow/borrowBook.js"></script>
+	src="${APP_PATH }/script/borrowBook.js"></script>
 </head>
 <body class="easyui-layout">
     <!-- 获取读者的id -->

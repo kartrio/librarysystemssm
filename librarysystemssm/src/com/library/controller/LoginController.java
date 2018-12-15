@@ -72,7 +72,7 @@ public class LoginController {
 
 	@RequestMapping("/loginPage")
 	public String loginPage() {
-		return "/login.jsp";
+		return "login";
 	}
 
 	@ResponseBody
@@ -129,7 +129,7 @@ public class LoginController {
 
 	@RequestMapping("/goMainPage")
 	public String goMainPage(){
-		return "/main.jsp";
+		return "main";
 	}
 	
 	@RequestMapping("/logout")

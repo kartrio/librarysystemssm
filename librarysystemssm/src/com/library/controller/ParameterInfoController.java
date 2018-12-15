@@ -22,7 +22,7 @@ public class ParameterInfoController {
 	 */
 	@RequestMapping("/parameterInfoPage")
 	public String parameterInfoPage() {
-		return "/jsp/library/findParameterInfo.jsp";
+		return "library/findParameterInfo";
 	}
 
 	/**

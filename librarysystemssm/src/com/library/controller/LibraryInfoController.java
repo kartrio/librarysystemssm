@@ -20,7 +20,7 @@ public class LibraryInfoController {
 	
 	@RequestMapping("/libraryInfoPage")
 	public String libraryInfoPage() {
-		return "/jsp/library/findLibraryInfo.jsp";
+		return "library/findLibraryInfo";
 	}
 
 	

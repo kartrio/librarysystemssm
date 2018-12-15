@@ -43,7 +43,7 @@ public class BookInfoController {
 	 */
 	@RequestMapping("/bookInfoPage")
 	public String bookInfoPage() {
-		return "/jsp/book/findBookInfo.jsp";
+		return "book/findBookInfo";
 	}
 
 	/**

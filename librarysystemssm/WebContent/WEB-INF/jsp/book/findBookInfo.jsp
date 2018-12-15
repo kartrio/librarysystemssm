@@ -3,9 +3,9 @@
 <html>
 <head>
 	<title>书籍信息</title>
-	<jsp:include page="/link.jsp" />
+	<jsp:include page="/WEB-INF/jsp/link.jsp" />
 	<script type="text/javascript" src="${APP_PATH }/layer/layer.js"></script>
-	<script type="text/javascript" src="jsp/book/findBookInfo.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/script/findBookInfo.js"></script>
 </head>
 <body class="easyui-layout">
 

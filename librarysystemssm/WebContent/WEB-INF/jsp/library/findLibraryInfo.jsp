@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<jsp:include page="/link.jsp" />
+<jsp:include page="/WEB-INF/jsp/link.jsp" />
 <script type="text/javascript" src="${APP_PATH }/layer/layer.js"></script>
-<script type="text/javascript" src="${APP_PATH }/jsp/library/findLibraryInfo.js"></script>
+<script type="text/javascript" src="${APP_PATH }/script/findLibraryInfo.js"></script>
 </head>
 <body>
 	<div align="center" style="margin-top: 2%">

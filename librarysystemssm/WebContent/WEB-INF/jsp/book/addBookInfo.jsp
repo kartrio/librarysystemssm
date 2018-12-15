@@ -5,8 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>新增书籍信息</title>
-<jsp:include page="/link.jsp" />
-<script type="text/javascript" src="jsp/findBookInfo.js"></script>
+<jsp:include page="/WEB-INF/jsp/link.jsp" />
+<script type="text/javascript" src="${APP_PATH }/script/findBookInfo.js"></script>
 </head>
 <body>
 	<div>

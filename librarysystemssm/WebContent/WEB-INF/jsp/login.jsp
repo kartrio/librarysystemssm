@@ -17,7 +17,7 @@
 <style>
 </style>
 </head>
-<body>
+<body onkeydown="pressEnter(event.keyCode)">
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -66,6 +66,16 @@
 	<script src="${APP_PATH }/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/layer/layer.js"></script>
 	<script>
+	
+	    //点击键盘上的Enter健自动执行dologin方法
+	    //在body上要加上onkeydown事件并将此方法作为其实现方法参数为event.keyCode即敲击的健对应的代码
+	    //enter健的keyCode是13
+		function pressEnter(keycode){
+			if(keycode == 13){
+				dologin();
+			}
+		}
+	    
 	    //登录
 		function dologin() {
 			var type = $(":selected").val();

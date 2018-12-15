@@ -21,7 +21,7 @@ public class ReaderTypeController {
 	
 	 @RequestMapping("/readerTypePage")
      public String readerTypePage(){
-    	 return "/jsp/reader/findReaderType.jsp";
+    	 return "reader/findReaderType";
      }
 	 
 	 /**
