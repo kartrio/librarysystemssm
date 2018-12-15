@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.model.sqlmap.libraryInfoMapper">
+   
+    <!-- 获取图书馆信息 -->
+    <select id="getLibraryInfo" resultType="LibraryInfo">
+        SELECT * FROM tb_library
+    </select>
+    
+    <!-- 修改图书馆信息 
+                      使用map作为参数,其中_parameter代表传递的参数,如果有多个参数时,可以使用get(0)来获取
+    -->
+    <update id="updateLibraryInfo" parameterType="java.util.Map">
+          UPDATE tb_library
+          <set>  
+            <foreach collection="_parameter.keys" item="key" separator=",">
+                  <if test="key != 'id'">
+                      ${key} = #{_parameter[${key}]}
+                  </if>
+                     
+          	</foreach>
+          </set>    
+          WHERE id = #{id}    
+    </update>
+</mapper>

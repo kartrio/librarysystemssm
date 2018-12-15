@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.model.sqlmap.readerInfoMapper">
+
+   <!-- 查询结果 -->
+   <resultMap type="ReaderInfo" id="readerInfoMap">
+      <id property="id" column="id"/>
+      <result property="name" column="name"/>
+      <result property="pwd" column="pwd"/>
+      <result property="sex" column="sex"/>
+      <result property="barcode" column="barcode"/>
+      <result property="vocation" column="vocation"/>
+      <result property="birthday" column="birthday"/>
+      <result property="paperType" column="paperType"/>
+      <result property="paperNO" column="paperNO"/>
+      <result property="tel" column="tel"/>
+      <result property="email" column="email"/>
+      <result property="createDate" column="createDate"/>
+      <result property="operator" column="operator"/>
+      <result property="remark" column="remark"/>
+      <result property="status" column="status"/>
+      
+      <!-- 与ReadType建立关联 -->
+      <association property="readerType" javaType="ReaderType">
+          <id property="id" column="typeid"/>
+          <result property="name" column="tname"/>
+          <result property="number" column="number"/>
+      </association>
+   </resultMap>
+
+   <!-- 分页查询所有具有指定条件的读者信息 ,参数类型为map-->
+   <select id="getRederInfo" resultMap="readerInfoMap">
+       SELECT r.*, rt.name tname, number
+       FROM tb_reader r LEFT JOIN tb_readertype rt 
+       ON r.typeid = rt.id
+       <where>
+          <if test="name != null">
+            r.name LIKE CONCAT('%',#{name},'%')
+          </if>
+       </where>
+       <if test="startRow != null and rows != null">
+          LIMIT #{startRow},#{rows}
+       </if>
+   </select>
+   
+   <!-- 查询读者总数 -->
+   <select id="getReaderInfoCount" resultType="int">
+        SELECT COUNT(*) FROM tb_reader
+   </select>
+   
+   <!-- 根据读者名和密码查询读者信息 -->
+   <select id="queryReaderByNameAndPwd" resultMap="readerInfoMap">
+       SELECT r.*, rt.name tname, number
+       FROM tb_reader r LEFT JOIN tb_readertype rt 
+       ON r.typeid = rt.id
+       <where>
+            r.name=#{name}
+            <if test="password != null and password != ''">
+                AND r.pwd=#{password}
+            </if>
+       </where>
+   </select>
+   
+   <!-- 插入读者信息 -->
+   <insert id="insertReader">
+       INSERT INTO tb_reader
+       <foreach collection="_parameter.keys" item="key" open="(" close=")" separator=",">
+           ${key}
+       </foreach>
+       VALUES
+       <foreach collection="_parameter.keys" item="key" open="(" close=")" separator=",">
+           #{_parameter[${key}]}
+       </foreach>
+   </insert>
+   
+   <!-- 修改读者信息 -->
+   <update id="updateReaderInfo">
+       UPDATE tb_reader 
+       <set>
+          <foreach collection="_parameter.keys" item="key" separator=",">
+               <if test="key != 'id'">
+                 ${key}=#{_parameter[${key}]}
+               </if>
+	      </foreach>
+       </set>
+       WHERE id=#{id}
+   </update>
+   
+   <!-- 删除读者信息 -->
+   <delete id="deleteReaderInfo" parameterType="int">
+       DELETE FROM tb_reader WHERE id=#{id}
+   </delete>
+</mapper>
