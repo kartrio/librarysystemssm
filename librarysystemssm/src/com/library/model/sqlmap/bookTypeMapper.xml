@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.model.sqlmap.bookTypeMapper">
+
+	<!-- 根据条件分页查询所有书籍类别信息 -->
+	<select id="getBookType" resultType="BookType">
+		SELECT * FROM tb_booktype
+		<where>
+			<if test="typename != null">
+				typename LIKE CONCAT('%',#{typename},'%')
+			</if>
+			<if test="days != null">
+				AND days = #{days}
+			</if>
+		</where>
+		<if test="startRow != null and rows != null">
+			LIMIT #{startRow},#{rows}
+		</if>
+	</select>
+	
+	<!-- 根据条件分页查询书籍类别信息的总数 -->
+	<select id="getBookTypeCount" resultType="int">
+		SELECT COUNT(*) FROM tb_booktype
+		<where>
+			<if test="typename != null">
+				typename LIKE CONCAT('%',#{typename},'%')
+			</if>
+			<if test="days != null">
+				AND days = #{days}
+			</if>
+		</where>
+	</select>
+	<!-- 新增书籍类别信息 -->
+	<insert id="insertBookType" parameterType="BookType">
+		INSERT INTO
+		tb_booktype(typename,days)
+		VALUES(#{typename},#{days})
+	</insert>
+
+	<!-- 修改书籍类别信息 -->
+	<update id="updateBookType" parameterType="BookType">
+		UPDATE tb_booktype
+		<set>
+			<if test="typename != null">
+				typename = #{typename},
+			</if>
+			<if test="days != null">
+				days = #{days}
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!-- 删除书籍类别信息 -->
+	<delete id="deleteBookType" parameterType="int">
+		DELETE FROM tb_booktype WHERE id=#{id}
+	</delete>
+</mapper>

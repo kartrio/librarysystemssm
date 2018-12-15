@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.model.sqlmap.parameterInfoMapper">
+
+    <!-- 获取参数信息 -->
+    <select id="getParameterInfo" resultType="ParameterInfo">
+        SELECT * FROM tb_parameter
+    </select>
+    
+    <!-- 更新参数信息 -->
+    <update id="updateParameterInfo" parameterType="ParameterInfo">
+         UPDATE tb_parameter
+          <set>  
+            <if test="cost != null">
+                cost= #{cost},
+            </if>
+            <if test="validity != null">
+                validity = #{validity}
+            </if>
+          </set>    
+          WHERE id = #{id} 
+    </update>
+</mapper>

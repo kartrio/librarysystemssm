@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd 
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+
+	<!-- 服务文件扫描 -->
+	<context:component-scan base-package="com.library.service" />
+
+	<!-- 控制器文件扫描 -->
+	<context:component-scan base-package="com.library.controller" />
+
+	<!-- 开启注解 -->
+	<mvc:annotation-driven />
+
+	<!-- 设置不拦截静态资源 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/checkcode" />
+			<mvc:exclude-mapping path="/loginPage" />
+			<mvc:exclude-mapping path="/registerPage" />
+			<mvc:exclude-mapping path="/login" />
+			<mvc:exclude-mapping path="/doRegister" />
+			<mvc:exclude-mapping path="/bootstrap/**" />
+			<mvc:exclude-mapping path="/easyui1.6/**" />
+			<mvc:exclude-mapping path="/css/**" />
+			<mvc:exclude-mapping path="/fonts/**" />
+			<mvc:exclude-mapping path="/layer/**" />
+			<mvc:exclude-mapping path="/script/**" />
+			<bean class="com.library.interceptor.SkipInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>
