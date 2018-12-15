@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.library.model.Bookcase;
 import com.library.service.BookcaseService;
 
+/**
+ * 书架信息控制器
+ * @author shao
+ *
+ */
 @Controller
 public class BookcaseController {
 
