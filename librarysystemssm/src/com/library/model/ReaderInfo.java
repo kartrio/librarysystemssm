@@ -22,6 +22,7 @@ public class ReaderInfo {
 	private String operator;
 	private String status;
 	private String remark;
+	private String url;
 	private ReaderType readerType;
 
 	public int getId() {
@@ -150,6 +151,14 @@ public class ReaderInfo {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override
