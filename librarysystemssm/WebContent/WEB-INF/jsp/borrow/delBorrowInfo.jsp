@@ -102,10 +102,14 @@ function agreeBorrow(){
         data : {
         	'id' : row.id,
         	'operator' : $('#operator').val(),
-        	'bookid' : row.bookInfo.id
+        	'bookid' : row.bookInfo.id,
+			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
+		    'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
         },
         success : function(data){
-        	layer.msg("处理成功!", {time : 1000,icon : 6,shift : 2}, function() {});
+        	layer.msg("处理成功!", {time : 1000,icon : 6,shift : 2}, function() {
+        		$('#dg').datagrid('loadData', data);
+        	});
         },
 		error : function(data){
 			layer.msg("处理失败!", {time : 2000,icon : 5,shift : 6}, function() {});
@@ -115,7 +119,7 @@ function agreeBorrow(){
 </script>
 </head>
 <body class="easyui-layout">
-    <input type="hidden" id="operator" value="${loginUser }">
+    <input type="hidden" id="operator" value="${loginUserName }">
 	<!-- 未处理借阅信息信息列表 -->
 	<div data-options="region:'center',border:false"
 		style="overflow: hidden; margin-top: 5px;">

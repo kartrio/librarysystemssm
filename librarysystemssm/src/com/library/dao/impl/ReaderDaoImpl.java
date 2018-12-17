@@ -43,4 +43,10 @@ public class ReaderDaoImpl implements ReaderDao {
 		SqlSession sqlSession = this.sqlSessionFactory.openSession(true);	
 		sqlSession.insert("insertReader", infoMap);
 	}
+
+	@Override
+	public void updateReaderInfo(Map<String, Object> clausesMap) {
+		SqlSession sqlSession = this.sqlSessionFactory.openSession(true);	
+		sqlSession.insert("updateReaderInfo", clausesMap);
+	}
 }

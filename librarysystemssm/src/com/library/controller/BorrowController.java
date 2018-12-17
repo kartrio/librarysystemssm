@@ -48,7 +48,8 @@ public class BorrowController {
 	 */
 	@ResponseBody
 	@RequestMapping("/findBorrowInfo")
-	public Object findBorrowInfo(String barcode, String fromTime, String toTime, Integer status,
+	public Object findBorrowInfo(String barcode, String fromTime, 
+			String toTime, Integer status,
 			@RequestParam(required=false,defaultValue="1")Integer page, 
 			@RequestParam(required=false,defaultValue="8")Integer rows) {
 		int startRow = (page - 1) * rows; 
@@ -63,7 +64,7 @@ public class BorrowController {
 		
 		try {
 			List<BorrowInfo> borrowInfoList = borrowInfoService.getBorrowInfo(clausesMap);
-			int count = borrowInfoService.getBorrowInfoCount();
+			int count = borrowInfoService.getBorrowInfoCount(clausesMap);
 			pages.put("total", count);
 		    pages.put("rows", borrowInfoList);
 		} catch (Exception e) {
@@ -79,7 +80,7 @@ public class BorrowController {
 	 * @return
 	 */
 	@RequestMapping("/agreeBorrow")
-	public String agreeBorrow(Integer id, Integer bookid, String operator){
+	public String agreeBorrow(Integer id, Integer bookid, String operator, Integer page, Integer rows){
 		//更新借阅信息
 		Map<String, Object> clausesMap = new HashMap<>();
 		clausesMap.put("id", id);
@@ -92,7 +93,7 @@ public class BorrowController {
 		bookMap.put("id", bookid);
 		bookMap.put("del", 1);
 		bookInfoService.editBookInfo(bookMap);
-		return "redirect:findBorrowInfo";
+		return "redirect:findBorrowInfo?page=" + page + "&rows=" + rows;
 	}
 	
 	/**
@@ -103,7 +104,7 @@ public class BorrowController {
 	 * @return
 	 */
 	@RequestMapping("/borrowBook")
-	public String borrowBook(Integer readerid, Integer bookid, Integer days){
+	public String borrowBook(Integer readerid, Integer bookid, Integer days, Integer page, Integer rows){
 		Date now = new Date();
 		Map<String, Object> clauseMap = new HashMap<>();
 		clauseMap.put("readerid", readerid);
@@ -117,6 +118,6 @@ public class BorrowController {
 		delMap.put("id", bookid);
 		delMap.put("del", 1);
 		bookInfoService.editBookInfo(delMap);
-		return "redirect:findBorrowInfo";
+		return "redirect:findBorrowInfo?page=" + page + "&rows=" + rows;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +21,7 @@ import com.library.service.BookInfoService;
 import com.library.service.BookTypeService;
 import com.library.service.BookcaseService;
 import com.library.service.PublishInfoService;
+import com.library.util.GenerateBarcode;
 
 @Controller
 public class BookInfoController {
@@ -42,7 +44,8 @@ public class BookInfoController {
 	 * @return
 	 */
 	@RequestMapping("/bookInfoPage")
-	public String bookInfoPage() {
+	public String bookInfoPage(Integer reader, Model model) {
+		model.addAttribute("reader", reader);
 		return "book/findBookInfo";
 	}
 
@@ -117,13 +120,14 @@ public class BookInfoController {
 	 */
 	@ResponseBody
 	@RequestMapping("/findBookInfo")
-	public Object findBookInfo(String bookname, String author, Integer del,
+	public Object findBookInfo(String barcode, String bookname, String author, Integer del,
 			@RequestParam(required = false, defaultValue = "1") Integer page,
 			@RequestParam(required = false, defaultValue = "8") Integer rows) {
 		int startRow = (page - 1) * rows;
 		Map<String, Object> clausesMap = new HashMap<>();
 		clausesMap.put("startRow", startRow);
 		clausesMap.put("rows", rows);
+		clausesMap.put("barcode", barcode);
 		clausesMap.put("bookname", bookname);
 		clausesMap.put("author", author);
 		clausesMap.put("del", del);
@@ -165,13 +169,14 @@ public class BookInfoController {
 	@RequestMapping("/addBookInfo")
 	public Object addBookInfo(BookInfo bookInfo, Integer page, Integer rows) {
 		Map<String, Object> clausesMap = new HashMap<String, Object>();
-		clausesMap.put("barcode", bookInfo.getBarcode());
+		clausesMap.put("barcode", GenerateBarcode.generBarcode());
 		clausesMap.put("bookname", bookInfo.getBookname());
 		clausesMap.put("typeid", bookInfo.getBookType().getId());
 		clausesMap.put("author", bookInfo.getAuthor());
 		clausesMap.put("isbn", bookInfo.getPublishInfo().getIsbn());
 		clausesMap.put("price", bookInfo.getPrice());
 		clausesMap.put("bookcase", bookInfo.getBookcase().getId());
+		clausesMap.put("translator", bookInfo.getTranslator());
 		clausesMap.put("page", bookInfo.getPage());
 		clausesMap.put("operator", bookInfo.getOperator());
 		clausesMap.put("inTime", new Date());

@@ -90,6 +90,13 @@ $(function() {
 			handler : del
 		} ]
 	});
+	
+	var readerLogin = $('#readerLogin').val();
+	if(readerLogin == 1){
+		$('#BookInfoAdd').hide();
+		$('#BookInfoUpdate').hide();
+		$('#BookInfoDelete').hide();
+	}
 })
 
 // 查询按钮的事件

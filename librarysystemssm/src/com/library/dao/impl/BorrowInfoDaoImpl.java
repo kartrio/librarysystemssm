@@ -23,9 +23,9 @@ public class BorrowInfoDaoImpl implements com.library.dao.BorrowInfoDao {
 	}
 
 	@Override
-	public int getBorrowInfoCount() {
+	public int getBorrowInfoCount(Map<String, Object> clausesMap) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		return sqlSession.selectOne("getBorrowInfoCount");
+		return sqlSession.selectOne("getBorrowInfoCount", clausesMap);
 	}
 
 	@Override

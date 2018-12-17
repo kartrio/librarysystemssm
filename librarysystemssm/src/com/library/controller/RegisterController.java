@@ -68,7 +68,7 @@ public class RegisterController {
 		infoMap.put("email", readerInfo.getEmail());
 		infoMap.put("createDate", new Date());
 		infoMap.put("remark", readerInfo.getRemark());
-		infoMap.put("status", "新建");
+		infoMap.put("status", "0");
 		try {
 			String checkcodese = (String) session.getAttribute("check_code");
 			String encheckcode = EncodeCheckCode.encodeByMD5(checkcode);
@@ -102,4 +102,19 @@ public class RegisterController {
 		return result;
 	}
 
+	/**
+	 * 管理员同意注册
+	 * @param id
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@RequestMapping("/agreeRegister")
+	public String agreeRegister(Integer id, Integer page, Integer rows){
+		Map<String, Object> clausesMap = new HashMap<>();
+		clausesMap.put("id", id);
+		clausesMap.put("status", 1);
+		readerService.updateReaderInfo(clausesMap);
+		return "redirect:findReaderInfo?page=" + page + "&rows=" + rows;
+	}
 }

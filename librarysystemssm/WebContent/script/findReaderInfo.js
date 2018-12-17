@@ -1,7 +1,6 @@
 // 页面加载成功时执行
 $(function() {
 	$('#readerDg').datagrid({
-		url : "findReaderInfo",
 		fit : true,
 		loadMsg : 'loading',
 		singleSelect : true,
@@ -47,14 +46,31 @@ $(function() {
 			field : 'email',
 			title : '电子邮箱',
 			align : 'center',
-			width : 100
+			width : 110
 		},{
 			field : 'createDate',
 			title : '注册日期',
 			align : 'center',
 			width : 100
+		},{
+			field : 'status',
+			title : '同意注册',
+			align : 'center',
+			width : 100,
+			formatter : function(value, row, index) {
+				if(row.status == 0){
+					return "未同意";
+				}else{
+					return "同意";
+				}
+			}
 		} ] ],
 		toolbar : [ {
+			id : 'AgreeRegister',
+			text : '同意注册',
+			iconCls : 'icon-remove',
+			handler : agreeRegister
+		},{
 			id : 'ReaderInfoDelete',
 			text : '删除',
 			iconCls : 'icon-remove',
@@ -69,9 +85,26 @@ $(function() {
 	
 	var manager = $('#manager').val();
 	if(manager == "true"){
+		$('#AgreeRegister').hide();
 		$('#ReaderInfoDelete').hide();
+		$.ajax({
+			type : 'POST',
+			url : 'findReaderInfo?status=1',
+			async : false,
+			success : function(result){
+				$('#readerDg').datagrid('loadData', result);
+			}
+		});
 	}else{
 		$('#ReaderInfoSelect').hide();
+		$.ajax({
+			type : 'POST',
+			url : 'findReaderInfo',
+			async : false,
+			success : function(result){
+				$('#readerDg').datagrid('loadData', result);
+			}
+		});
 	}
 })
 
@@ -179,6 +212,33 @@ function addNewManager(){
 		}
 	});
 }
+
+//同意用户注册
+function agreeRegister(){
+	var row = $('#readerDg').datagrid('getSelected');
+	if (!row) {
+		$.messager.alert("系统提示", "请先选择一条记录", "info");
+		return;
+	}
+	$.ajax({
+		type : 'POST',
+		url : 'agreeRegister',
+		data : {
+			'id' : row.id,
+			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
+		    'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
+		},
+		success : function(result){
+			layer.msg("确认成功!", {time : 2000,icon : 6,shift : 2}, function() {
+				$('#dg').datagrid("loadData",result);				
+			});
+		},
+		error : function(data){
+			layer.msg("确认失败!", {time : 2000,icon : 5,shift : 6}, function() {});
+		}
+	});
+}
+
 // 重置按钮的事件
 function flushForm() {
 	$('#frmSearch').form('reset');

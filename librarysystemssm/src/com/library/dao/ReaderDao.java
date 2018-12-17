@@ -19,4 +19,7 @@ public interface ReaderDao {
 
 	// 添加读者信息
 	void addReaderInfo(Map<String, Object> infoMap);
+
+	//修改读者信息
+	void updateReaderInfo(Map<String, Object> clausesMap);
 }

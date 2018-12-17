@@ -9,8 +9,10 @@
 <script type="text/javascript" src="${APP_PATH }/script/findLibraryInfo.js"></script>
 </head>
 <body>
+ 	<!-- 该字段用于判断是否为读者登录 -->
+    <input type="hidden" id="readerLogin" value="${reader }">
 	<div align="center" style="margin-top: 2%">
-		<form id="frmLibraryInfo" action="updateLibraryInfo" method="post">
+		<form id="frmLibraryInfo" name="frmLibraryInfo" action="updateLibraryInfo" method="post">
 			<input type="hidden" name="id">
 			<table>
 				<tr>
@@ -53,7 +55,7 @@
 				<label>图书馆简介:</label> <input id="introduce" class="easyui-textbox" name="introduce"
 					data-options="multiline:true" style="width: 380px; height: 100px" />
 			</div>
-			<div style="margin-top: 20px">
+			<div id="doUpdate" style="margin-top: 20px">
 				<a class="easyui-linkbutton" style="width: 100px" onclick="doUpdate()">保存</a>
 			</div>
 		</form>

@@ -8,7 +8,8 @@
 	<script type="text/javascript" src="${APP_PATH }/script/findBookInfo.js"></script>
 </head>
 <body class="easyui-layout">
-
+ 	<!-- 该字段用于判断是否为读者登录 -->
+    <input type="hidden" id="readerLogin" value="${reader }">
    <!-- 查询 -->
    <div data-options="region:'north',border:true" style="height:13%">
 	   <form id="frmSearch" style="margin-top:20px;margin-left:20px;">

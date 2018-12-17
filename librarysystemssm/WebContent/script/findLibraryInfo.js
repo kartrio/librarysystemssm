@@ -15,6 +15,11 @@ $(function() {
 			}
 		}
 	});
+	var readerLogin = $('#readerLogin').val();
+	if(readerLogin == 1){
+		$('#doUpdate').hide();
+		$('input',$('form[name="frmLibraryInfo"]')).attr('readonly',true);
+	}
 });
 
 //修改图书馆信息

@@ -15,39 +15,39 @@
 			<input type="hidden" name="operator" value="${loginUser }">
 			<table>
 				<tr>
-					<td>条形码:</td>
-					<td><input class="easyui-textbox" name="barcode" /></td>
 					<td>图书名称:</td>
 					<td><input class="easyui-textbox" name="bookname" /></td>
-				</tr>
-				<tr>
 					<td>图书类型:</td>
 					<td>
 					   <input class="easyui-combobox" name="bookType.id" 
 					   data-options="valueField: 'id',textField: 'typename',url: 'getBookType',
 					   panelHeight:'auto',value:1">
 					</td>
-					<td>作者:</td>
-					<td><input class="easyui-textbox" name="author" /></td>
 				</tr>
 				<tr>
+					<td>作者:</td>
+					<td><input class="easyui-textbox" name="author" /></td>
 					<td>出版社:</td>
 					<td>
 					<input class="easyui-combobox" name="publishInfo.isbn" 
 					   data-options="valueField: 'isbn',textField: 'pubname',url: 'getPublishInfo',
 					   panelHeight:'auto',value:'7-302'">
 					</td>
+				</tr>
+				<tr>
 					<td>价格:</td>
 					<td><input class="easyui-numberbox" data-options="precision:2"
 						name="price" /></td>
-				</tr>
-				<tr>
 					<td>书架:</td>
 					<td>
 					   <input class="easyui-combobox" name="bookcase.id" 
 					   data-options="valueField: 'id',textField: 'name',url: 'getBookcase',
 					   panelHeight:'auto',value:1">
 					</td>
+				</tr>
+				<tr>
+				    <td>翻译者:</td>
+					<td><input class="easyui-numberbox" name="translator" /></td>
 					<td>页数:</td>
 					<td><input class="easyui-numberbox" name="page" /></td>
 				</tr>

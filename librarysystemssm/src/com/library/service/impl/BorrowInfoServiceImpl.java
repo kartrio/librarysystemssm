@@ -24,8 +24,8 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
 	}
 
 	@Override
-	public int getBorrowInfoCount() {
-		return borrowInfoDao.getBorrowInfoCount();
+	public int getBorrowInfoCount(Map<String, Object> clausesMap) {
+		return borrowInfoDao.getBorrowInfoCount(clausesMap);
 	}
 
 	@Override

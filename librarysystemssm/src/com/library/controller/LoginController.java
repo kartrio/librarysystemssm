@@ -93,6 +93,7 @@ public class LoginController {
 					if (readerInfo != null) {
 						session.setAttribute("loginUserId", readerInfo.getId());
 						session.setAttribute("loginUserName", readerInfo.getName());
+						session.setAttribute("loginUserStatus", readerInfo.getStatus());
 						result.setSuccess(true);
 					} else {
 						msg = "读者名或密码错误!";

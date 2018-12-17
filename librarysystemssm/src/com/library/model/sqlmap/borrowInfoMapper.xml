@@ -22,20 +22,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 与BookInfo建立关联 -->
 		<association property="bookInfo" javaType="BookInfo">
 			<id property="id" column="bookid" />
-			<id property="barcode" column="bookBarcode"/>
+			<result property="barcode" column="bookBarcode"/>
 			<result property="bookname" column="bookname" />
+			<!-- BookInfo与publishInfo建立关联 -->
+			<association property="publishInfo" javaType="PublishInfo">
+			    <result property="isbn" column="bIsbn" />
+			    <result property="pubname" column="pubname" />
+			</association>
+			<!-- BookInfo与bookcase建立关联 -->
+			<association property="bookcase" javaType="BookCase">
+			    <id property="id" column="bookcase"/>
+			    <result property="name" column="bcname"/>
+			</association>
 		</association>
 	</resultMap>
 
 	<!-- 分页查询所有具有指定条件的借阅信息 ,参数类型为map -->
 	<select id="getBorrowInfo" resultMap="borrowInfoMap">
-		SELECT bo.*,r.barcode readerBarcode, r.name rname ,bi.barcode bookBarcode, bookname
+		SELECT bo.*,r.barcode readerBarcode, r.name rname ,
+		bi.barcode bookBarcode, bookname,bi.ISBN bIsbn, pubname,bookcase,bc.name bcname
 		FROM tb_borrow bo
 		LEFT JOIN tb_reader r ON bo.readerid = r.id
 		LEFT JOIN tb_bookinfo bi ON bo.bookid = bi.id
+		LEFT JOIN tb_bookcase bc ON bi.bookcase = bc.id
+		LEFT JOIN tb_publishing pu ON bi.isbn = pu.ISBN
 		<where>
 			<if test="readerid != null">
-				readerid = #{readerid},
+				readerid = #{readerid}
 			</if>
 			<if test="bookid != null">
 				AND bookid = #{bookid}
@@ -49,6 +62,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="status != null">
 				AND bo.status = #{status}
 			</if>
+			<if test="ifback != null">
+			    AND ifback = #{ifback}
+			</if>
+			<if test="bookname != null and bookname != ''">
+			    AND bookname LIKE CONCAT('%',#{bookname},'%')
+			</if>
 		</where>
 		<if test="startRow != null and rows != null">
 		    LIMIT #{startRow},#{rows}
@@ -58,6 +77,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 查询图书借阅信息的总数 -->
     <select id="getBorrowInfoCount" resultType="int">
     	SELECT COUNT(*) FROM tb_borrow
+    	<where>
+    	   <if test="readerid != null">
+				readerid = #{readerid}
+			</if>
+			<if test="bookid != null">
+				AND bookid = #{bookid}
+			</if>
+			<if test="fromTime != null and toTime != null and fromTime != '' and toTime != ''">
+			    AND borrowTime BETWEEN #{fromTime} AND #{toTime}
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+			<if test="ifback != null">
+			    AND ifback = #{ifback}
+			</if>
+    	</where>
     </select>
     
 	<!-- 插入借阅信息 -->

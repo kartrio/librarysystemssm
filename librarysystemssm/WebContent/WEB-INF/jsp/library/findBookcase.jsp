@@ -8,6 +8,9 @@
 <script type="text/javascript" src="${APP_PATH }/script/findBookcase.js"></script>
 </head>
 <body class="easyui-layout">
+    
+    <!-- 该字段用于判断是否为读者登录 -->
+    <input type="hidden" id="readerLogin" value="${reader }">
 	<!-- 书架信息列表 -->
 	<div data-options="region:'center',border:false"
 		style="overflow: hidden; margin-top: 5px">

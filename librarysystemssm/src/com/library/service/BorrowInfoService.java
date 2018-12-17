@@ -11,7 +11,7 @@ public interface BorrowInfoService {
 	List<BorrowInfo> getBorrowInfo(Map<String, Object> clausesMap);
 
 	//查询图书借阅信息总条数
-	int getBorrowInfoCount();
+	int getBorrowInfoCount(Map<String, Object> clausesMap);
 
 	//修改借阅信息
 	void updateBorrowInfo(Map<String, Object> clausesMap);

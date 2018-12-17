@@ -38,11 +38,13 @@ public class ReaderInfoController {
 	 */
 	@ResponseBody
 	@RequestMapping("/findReaderInfo")
-	public Object findReaderInfo(String name, @RequestParam(required = false, defaultValue = "1") Integer page,
+	public Object findReaderInfo(String name,Integer status,
+			@RequestParam(required = false, defaultValue = "1") Integer page,
 			@RequestParam(required = false, defaultValue = "8") Integer rows) {
 		int startRow = (page - 1) * rows;
 		Map<String, Object> clausesMap = new HashMap<>();
 		clausesMap.put("name", name);
+		clausesMap.put("status", status);
 		clausesMap.put("startRow", startRow);
 		clausesMap.put("rows", rows);
 

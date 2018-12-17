@@ -31,16 +31,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN tb_bookinfo bi ON g.bookid = bi.id
 		<where>
 			<if test="readerid != null">
-				readerid = #{readerid},
+				readerid = #{readerid}
 			</if>
 			<if test="bookid != null">
-				AND bookid = bookid
+				AND bookid = #{bookid}
+			</if>
+			<if test="status != null">
+			    AND g.status = #{status}
 			</if>
 		</where>
-		LIMIT #{start},#{size}
+		<if test="startRow != null and rows != null">
+		  LIMIT #{startRow},#{rows}
+		</if>
 	</select>
-
-	<!-- 插入借阅信息 -->
+    <!-- 根据条件查询归还信息的总数 -->
+    <select id="getGiveBackInfoCount" resultType="int">
+        SELECT COUNT(*) FROM tb_giveback
+        <where>
+           <if test="readerid != null">
+				readerid = #{readerid}
+			</if>
+			<if test="bookid != null">
+				AND bookid = #{bookid}
+			</if>
+			<if test="status != null">
+			    AND status = #{status}
+			</if>
+        </where>
+    </select>
+    
+	<!-- 插入归还信息 -->
 	<insert id="insertGiveBackInfo">
 		INSERT INTO tb_giveback
 		<foreach collection="_parameter.keys" item="key" open="("
@@ -54,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</insert>
 
-	<!-- 修改借阅信息 -->
+	<!-- 修改归还信息 -->
 	<update id="updateGiveBackInfo">
 		UPDATE tb_giveback
 		<set>
@@ -67,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE id=#{id}
 	</update>
 
-	<!-- 删除借阅信息 -->
+	<!-- 删除归还信息 -->
 	<delete id="deleteGiveBackInfo" parameterType="int">
 		DELETE FROM tb_giveback WHERE id=#{id}
 	</delete>

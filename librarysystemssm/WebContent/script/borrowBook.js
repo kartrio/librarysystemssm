@@ -85,8 +85,9 @@ $(function() {
 // 查询按钮的事件
 function query() {
 	var json = {};
+	json['barcode'] = $('#barcode').val();
 	json['bookname'] = $('#bookname').val();
-	json['author'] = $('#author').val();
+	json['del'] = 0;
 	$.ajax({
 		type : 'POST',
 		url : 'findBookInfo',
@@ -111,23 +112,19 @@ function borrowBook(){
 		data : {
 			'readerid' : $('#readerid').val(),
 			'bookid' : row.id,
-			'days' : row.bookType.days
+			'days' : row.bookType.days,
+			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
+		    'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
 		},
 		success : function(result){
 			layer.msg("借阅成功,等待管理员审核!", {time : 2000,icon : 6,shift : 2}, function() {
-				$('#dg').datagrid("load",result);				
+				$('#dg').datagrid("loadData",result);				
 			});
 		},
 		error : function(data){
 			layer.msg("借阅失败,联系管理员!", {time : 2000,icon : 5,shift : 6}, function() {});
 		}
 	});
-}
-
-// 新增对话框上的取消按钮事件
-function closeDialog(formId, dialogId) {
-	$('#' + formId).form('reset');
-	$('#' + dialogId).dialog('close');
 }
 
 // 重置按钮的事件

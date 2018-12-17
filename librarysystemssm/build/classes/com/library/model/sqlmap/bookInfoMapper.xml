@@ -46,8 +46,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN tb_booktype bt ON bi.typeid = bt.id
 		LEFT JOIN tb_publishing pli ON bi.ISBN = pli.ISBN
 		<where>
+		    <if test="barcode != null and barcode != ''">
+		        barcode = #{barcode}
+		    </if>
 			<if test="bookname != null">
-				bookname LIKE CONCAT('%' , #{bookname} , '%')
+				AND bookname LIKE CONCAT('%' , #{bookname} , '%')
 			</if>
 			<if test="author != null">
 			    AND author LIKE CONCAT('%' , #{author} , '%')

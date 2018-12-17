@@ -41,6 +41,12 @@ $(function() {
 		} ]
 	});
 
+	var readerLogin = $('#readerLogin').val();
+	if(readerLogin == 1){
+		$('#BookcaseAdd').hide();
+		$('#BookcaseUpdate').hide();
+		$('#BookcaseDelete').hide();
+	}
 })
 
 // 点击新增按钮触发

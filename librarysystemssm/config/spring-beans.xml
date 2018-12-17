@@ -122,4 +122,15 @@
     <bean id="borrowInfoService" class="com.library.service.impl.BorrowInfoServiceImpl">
         <property name="borrowInfoDao" ref="borrowInfoDao"></property>
     </bean> 
+    
+    <!-- 归还信息 -->
+    <bean id="giveBackInfo" class="com.library.model.GiveBackInfo"/>
+    
+    <bean id="giveBackInfoDao" class="com.library.dao.impl.GiveBackInfoDaoImpl">
+        <property name="sqlSessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="giveBackInfoService" class="com.library.service.impl.GiveBackInfoServiceImpl">
+        <property name="giveBackInfoDao" ref="giveBackInfoDao"></property>
+    </bean>
 </beans>
