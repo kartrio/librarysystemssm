@@ -20,5 +20,9 @@ public interface ManagerDao {
 	// 分页查询管理员信息
 	public List<Manager> getManager(Map<String, Object> clausesMap);
 
+	//新增管理员信息
 	public void addManager(Manager manager);
+
+	//根据id获取管理员信息
+	public Manager getManagerById(Integer id);
 }

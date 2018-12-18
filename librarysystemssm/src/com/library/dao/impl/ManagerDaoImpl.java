@@ -49,4 +49,10 @@ public class ManagerDaoImpl implements ManagerDao {
 		SqlSession sqlSession = this.sqlSessionFactory.openSession(true);	
 		sqlSession.insert("insertManager", manager);
 	}
+
+	@Override
+	public Manager getManagerById(Integer id) {
+		SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		return sqlSession.selectOne("getManagerById", id);
+	}
 }

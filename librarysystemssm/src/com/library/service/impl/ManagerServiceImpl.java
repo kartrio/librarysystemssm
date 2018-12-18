@@ -44,4 +44,9 @@ public class ManagerServiceImpl implements ManagerService {
 	public void addManager(Manager manager) {
 		managerDao.addManager(manager);		
 	}
+
+	@Override
+	public Manager getManagerById(Integer id) {
+		return managerDao.getManagerById(id);
+	}
 }

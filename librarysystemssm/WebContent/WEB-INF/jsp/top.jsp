@@ -5,8 +5,9 @@
 	    <h2 style="margin-left:5%;margin-top:3px;font-family: FZShuTi;font-size: 35px">图书馆管理系统</h2>
 		<div style="position: absolute;width: 17%;right:0;bottom:10%;">
 		    <span style="color: #8B864E;">
-			    您好,<%=session.getAttribute("loginUserName").toString()%> |
-			 <a style="color:#8B864E" onclick="addTab('updatePassword','更改口令')">更改口令</a> |
+			 <a onclick="addTab('userInfoPage?role=${role}','个人信息')">
+			   您好,<%=session.getAttribute("loginUserName").toString()%></a> |
+			 <a style="color:#8B864E" onclick="addTab('updatePwdPage','更改口令')">更改口令</a> |
 			 <a href="${APP_PATH }/logout" style="color:#8B864E">安全退出</a>		    
 		    </span>
 		</div>

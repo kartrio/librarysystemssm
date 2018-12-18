@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.ReaderInfo;
 import com.library.service.ReaderService;
+import com.library.util.AJAXResult;
 
 @Controller
 public class ReaderInfoController {
@@ -20,6 +21,14 @@ public class ReaderInfoController {
 	@Autowired
 	private ReaderService readerService;
 
+	/**
+	 * 跳转到读者信息页面
+	 * @param manager
+	 * @param page
+	 * @param rows
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/readerInfoPage")
 	public String readerInfoPage(boolean manager,
 			@RequestParam(required=false,defaultValue="1")Integer page,
@@ -61,6 +70,65 @@ public class ReaderInfoController {
 		return pages;
 	}
 	
+	/**
+	 * 根据id查询用户信息
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/findReaderInfoById")
+	public Object findReaderInfoById(Integer id){
+		AJAXResult result = new AJAXResult();
+		ReaderInfo readerInfo = null;
+		try {
+			readerInfo = readerService.getReaderInfoById(id);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setSuccess(false);
+		}
+		result.setData(readerInfo);
+		return result;
+	}
+	
+	/**
+	 * 修改读者信息
+	 * @param readerInfo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/updateReaderInfo")
+	public Object updateReaderInfo(ReaderInfo readerInfo){
+		AJAXResult result = new AJAXResult();
+		String msg = "";
+		Map<String, Object> clausesMap = new HashMap<>();
+		clausesMap.put("id", readerInfo.getId());
+		clausesMap.put("name", readerInfo.getName());
+		clausesMap.put("sex", readerInfo.getSex());
+		clausesMap.put("birthday", readerInfo.getBirthday());
+		clausesMap.put("paperType", readerInfo.getPaperType());
+		clausesMap.put("paperNO", readerInfo.getPaperNO());
+		clausesMap.put("tel", readerInfo.getTel());
+		clausesMap.put("email", readerInfo.getEmail());
+		try {
+			readerService.updateReaderInfo(clausesMap);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg = "未知错误,请联系管理员!";
+			result.setSuccess(false);
+		}
+		result.setData(msg);
+		return result;
+	}
+	
+	/**
+	 * 删除读者信息
+	 * @param id
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@RequestMapping("/deleteReaderInfo")
 	public String deleteReaderInfo(int id, Integer page, Integer rows){
 	    readerService.deleteReaderInfo(id);

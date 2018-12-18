@@ -11,7 +11,7 @@
 <script type="text/javascript" src="${APP_PATH }/layer/layer.js"></script>
 <script type="text/javascript" src="${APP_PATH }/script/index.js"></script>
 </head>
-<body class="easyui-layout">
+<body class="easyui-layout" style="cursor: pointer;">
 	<div data-options="region:'north'"
 		style="height: 10%; overflow: hidden; background: linear-gradient(to right, #6495ED, #8DEEEE);">
 		<jsp:include page="/WEB-INF/jsp/top.jsp" />

@@ -12,7 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              name LIKE CONCAT('%',#{name},'%')
           </if>
        </where>
-       LIMIT #{startRow},#{rows}
+       <if test="startRow != null and rows != null">
+       	     LIMIT #{startRow},#{rows}
+       </if>
    </select>
    
    <!-- 获取管理员数量 -->
@@ -32,6 +34,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        
    </select>
    
+   <!-- 根据id查询管理员信息 -->
+   <select id="getManagerById" parameterType="int" resultType="Manager">
+             SELECT * FROM tb_manager
+             WHERE id = #{id}
+   </select>
    <!-- 插入管理员信息 -->
    <insert id="insertManager" parameterType="Manager">
         INSERT INTO tb_manager(name, PWD)
@@ -45,8 +52,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           <if test="name != null">
               name = #{name},
           </if>
-          <if test="pwd != null">
-              pwd = #{pwd}
+          <if test="PWD != null">
+              PWD = #{PWD}
           </if>
        </set>
        WHERE id=#{id}

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.Manager;
 import com.library.service.ManagerService;
+import com.library.util.AJAXResult;
 
 @Controller
 public class ManagerController {
@@ -19,6 +20,10 @@ public class ManagerController {
 	@Autowired
 	private ManagerService managerService;
 
+	/**
+	 * 跳转到管理员信息页面
+	 * @return
+	 */
 	@RequestMapping("/managerPage")
 	public String managerPage() {
 		return "library/findManager";
@@ -29,6 +34,14 @@ public class ManagerController {
 		return "library/findReader";
 	}
 	
+	/**
+	 * 分页查询管理员信息
+	 * @param name
+	 * @param errorMsg
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/findManager")
 	public Object findManager(String name,
@@ -57,6 +70,14 @@ public class ManagerController {
 		return pages;
 	}
 	
+	/**
+	 * 新增管理员信息
+	 * @param name
+	 * @param PWD
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@RequestMapping("/addManager")
 	public String addManager(String name, String PWD, Integer page, Integer rows){
 		Map<String, Object> clauseMap = new HashMap<>();
@@ -74,15 +95,72 @@ public class ManagerController {
 		
 	}
 	
+	/**
+	 * 修改管理员信息
+	 * @param manager
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@RequestMapping("/editManager")
 	public String editManager(Manager manager, Integer page, Integer rows){
 		managerService.editManager(manager);
 		return "redirect:findManager?page=" + page + "&rows=" + rows;
 	}
 	
+	/**
+	 * 删除管理员信息
+	 * @param id
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@RequestMapping("/deleteManager")
 	public String deleteManager(int id, Integer page, Integer rows){
 		managerService.deleteManager(id);
 		return "redirect:findManager?page=" + page + "&rows=" + rows;
+	}
+	
+	/**
+	 * 根据id查询管理员信息
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getManagerById")
+	public Object getManagerById(Integer id){
+		AJAXResult result = new AJAXResult();
+		Manager manager = null;
+		try {
+			manager = managerService.getManagerById(id);
+		    result.setSuccess(true);	
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setSuccess(false);
+		}
+		result.setData(manager);
+		return result;
+	}
+	
+	/**
+	 * findManagerById页面的更新管理员信息方法
+	 * @param manager
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/updateManager")
+	public Object updateManager(Manager manager){
+		AJAXResult result = new AJAXResult();
+		String msg = "";
+		try {
+			managerService.editManager(manager);
+		    result.setSuccess(true);	
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg = "未知错误!";
+			result.setSuccess(false);
+		}
+		result.setData(msg);
+		return result;
 	}
 }

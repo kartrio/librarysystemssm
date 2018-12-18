@@ -66,6 +66,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        </where>
    </select>
    
+   <!-- 根据id查询读者信息 -->
+   <select id="getReaderInfoById" parameterType="int" resultMap="readerInfoMap">
+        SELECT r.*, rt.name tname, number
+        FROM tb_reader r LEFT JOIN tb_readertype rt 
+        ON r.typeid = rt.id
+        WHERE r.id = #{id}
+   </select>
+   
    <!-- 插入读者信息 -->
    <insert id="insertReader">
        INSERT INTO tb_reader

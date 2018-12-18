@@ -60,7 +60,7 @@
 </head>
 <body>
 	<div align="center" style="margin-top:2%">
-		<form id="frmParameterInfo" action="updateParameterInfo" method="post">
+		<form id="frmParameterInfo" method="post">
 		    <input type="hidden" name="id"> 
 			<table>
 				<tr>

@@ -45,4 +45,9 @@ public class ReaderServiceImpl implements ReaderService {
 	public void updateReaderInfo(Map<String, Object> clausesMap) {
 		readerDao.updateReaderInfo(clausesMap);
 	}
+
+	@Override
+	public ReaderInfo getReaderInfoById(Integer id) {
+		return readerDao.getReaderInfoById(id);
+	}
 }

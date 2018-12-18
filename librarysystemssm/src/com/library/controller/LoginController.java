@@ -36,6 +36,11 @@ public class LoginController {
 	@Autowired
 	private ManagerService managerService;
 
+	/**
+	 * 生成验证码
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping("/checkcode")
 	public void checkcode(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
@@ -70,11 +75,24 @@ public class LoginController {
 		}
 	}
 
+	/**
+	 * 跳转到登录页面
+	 * @return
+	 */
 	@RequestMapping("/loginPage")
 	public String loginPage() {
 		return "login";
 	}
 
+	/**
+	 * 登录
+	 * @param name
+	 * @param password
+	 * @param role
+	 * @param checkcode
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/login")
 	public Object doLogin(String name, String password, String role, String checkcode, HttpSession session) {
@@ -128,14 +146,108 @@ public class LoginController {
 		return result;
 	}
 
+	/**
+	 * 跳转到主界面
+	 * @return
+	 */
 	@RequestMapping("/goMainPage")
 	public String goMainPage(){
 		return "main";
 	}
 	
+	/**
+	 * 登出
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:loginPage";
+	}
+	
+	/**
+	 * 跳转到修改密码界面
+	 * @return
+	 */
+	@RequestMapping("/updatePwdPage")
+	public String updatePwdPage(){
+		return "updatePwd";
+	}
+	
+	/**
+	 * 修改密码
+	 * @param id
+	 * @param role
+	 * @param initalPwd
+	 * @param newPwd
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/updatePwd")
+	public Object updatePwd(Integer id, String role, String initalPwd, String newPwd){
+		AJAXResult result = new AJAXResult();
+		String msg = "";
+		try {
+			if("reader".equals(role)){
+				ReaderInfo readerInfo = readerService.getReaderInfoById(id);
+				if(readerInfo != null){
+					if(initalPwd.equals(readerInfo.getPwd())){
+						Map<String, Object> infoMap = new HashMap<>();
+						infoMap.put("id", id);
+						infoMap.put("pwd", newPwd);
+						readerService.updateReaderInfo(infoMap);
+						result.setSuccess(true);
+					}else{
+						msg = "初始密码错误!";
+						result.setSuccess(false);
+					}
+				}else{
+					msg = "未知错误,请联系管理员!";
+					result.setSuccess(false);
+				}
+			}else if("manager".equals(role)){
+				Manager manager = managerService.getManagerById(id);
+				if(manager != null){
+					if(initalPwd.equals(manager.getPWD())){
+						Manager m2 = new Manager();
+						m2.setId(id);
+						m2.setPWD(newPwd);
+						managerService.editManager(m2);
+						result.setSuccess(true);
+					}else{
+						msg = "初始密码错误!";
+						result.setSuccess(false);
+					}
+				}else{
+					msg = "未知错误,请联系管理员!";
+					result.setSuccess(false);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg = "未知错误,请联系管理员!";
+			result.setSuccess(false);
+		}
+		result.setData(msg);
+		return result;
+	}
+	
+	/**
+	 * 根据角色判断需要加载的用户信息页面种类
+	 * 1. 读者
+	 * 2. 管理员
+	 * @param role
+	 * @return
+	 */
+	@RequestMapping("/userInfoPage")
+	public String userInfoPage(String role){
+		if("reader".equals(role)){
+			return "reader/findReaderInfoById";
+		}else if("manager".equals(role)){
+			return "library/findManagerById";
+		}else{
+			return "redirect:loginPage";
+		}
 	}
 }

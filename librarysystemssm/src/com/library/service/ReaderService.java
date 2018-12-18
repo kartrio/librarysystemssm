@@ -22,4 +22,7 @@ public interface ReaderService {
 
 	//修改读者信息
 	void updateReaderInfo(Map<String, Object> clausesMap);
+
+	//根据id获取用户信息
+	ReaderInfo getReaderInfoById(Integer id);
 }

@@ -24,4 +24,7 @@ public interface ManagerService {
 
 	//新增管理员
 	public void addManager(Manager manager);
+
+	//根据id获取管理员信息
+	public Manager getManagerById(Integer id);
 }
