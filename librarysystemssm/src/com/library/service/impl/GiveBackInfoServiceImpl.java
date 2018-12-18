@@ -38,4 +38,9 @@ public class GiveBackInfoServiceImpl implements GiveBackInfoService {
 		giveBackInfoDao.updateGiveBackInfo(clausesMap);
 	}
 
+	@Override
+	public void deleteGiveBackInfo(Integer id) {
+		giveBackInfoDao.deleteGiveBackInfo(id);
+	}
+
 }

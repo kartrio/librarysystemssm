@@ -49,7 +49,7 @@ public class BorrowController {
 	@ResponseBody
 	@RequestMapping("/findBorrowInfo")
 	public Object findBorrowInfo(String barcode, String fromTime, 
-			String toTime, Integer status,
+			String toTime, Integer status, Integer ifback,
 			@RequestParam(required=false,defaultValue="1")Integer page, 
 			@RequestParam(required=false,defaultValue="8")Integer rows) {
 		int startRow = (page - 1) * rows; 
@@ -60,6 +60,7 @@ public class BorrowController {
 		clausesMap.put("startRow", startRow);
 		clausesMap.put("rows", rows);
 		clausesMap.put("status", status);
+		clausesMap.put("ifback", ifback);
 		Map<String, Object> pages = new HashMap<String, Object>();
 		
 		try {
@@ -93,9 +94,21 @@ public class BorrowController {
 		bookMap.put("id", bookid);
 		bookMap.put("del", 1);
 		bookInfoService.editBookInfo(bookMap);
-		return "redirect:findBorrowInfo?page=" + page + "&rows=" + rows;
+		return "redirect:findBorrowInfo?status=0&page=" + page + "&rows=" + rows;
 	}
 	
+	/**
+	 * 拒绝解约申请
+	 * @param id
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@RequestMapping("/disagreeBorrow")
+	public String disagreeBorrow(Integer id, Integer page, Integer rows){
+		borrowInfoService.deleteBorrowInfo(id);
+		return "redirect:findBorrowInfo?status=0&page=" + page + "&rows=" + rows;
+	}
 	/**
 	 * 借阅书籍
 	 * @param readerid
@@ -118,6 +131,6 @@ public class BorrowController {
 		delMap.put("id", bookid);
 		delMap.put("del", 1);
 		bookInfoService.editBookInfo(delMap);
-		return "redirect:findBorrowInfo?page=" + page + "&rows=" + rows;
+		return "redirect:findBookInfo?del=0&page=" + page + "&rows=" + rows;
 	}
 }

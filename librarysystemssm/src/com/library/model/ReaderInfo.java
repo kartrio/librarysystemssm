@@ -23,6 +23,7 @@ public class ReaderInfo {
 	private String status;
 	private String remark;
 	private String url;
+	private String libraryCard;
 	private ReaderType readerType;
 
 	public int getId() {
@@ -152,7 +153,7 @@ public class ReaderInfo {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public String getUrl() {
 		return url;
 	}
@@ -161,12 +162,21 @@ public class ReaderInfo {
 		this.url = url;
 	}
 
+	public String getLibraryCard() {
+		return libraryCard;
+	}
+
+	public void setLibraryCard(String libraryCard) {
+		this.libraryCard = libraryCard;
+	}
+
 	@Override
 	public String toString() {
 		return "ReaderInfo [id=" + id + ", name=" + name + ", pwd=" + pwd + ", sex=" + sex + ", barcode=" + barcode
 				+ ", vocation=" + vocation + ", birthday=" + birthday + ", paperType=" + paperType + ", paperNO="
 				+ paperNO + ", tel=" + tel + ", email=" + email + ", createDate=" + createDate + ", operator="
-				+ operator + ", status=" + status + ", remark=" + remark + ", readerType=" + readerType + "]";
+				+ operator + ", status=" + status + ", remark=" + remark + ", url=" + url + ", libraryCard="
+				+ libraryCard + ", readerType=" + readerType + "]";
 	}
 
 }

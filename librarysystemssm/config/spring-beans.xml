@@ -133,4 +133,15 @@
     <bean id="giveBackInfoService" class="com.library.service.impl.GiveBackInfoServiceImpl">
         <property name="giveBackInfoDao" ref="giveBackInfoDao"></property>
     </bean>
+    
+     <!-- 办证信息 -->
+    <bean id="applyInfo" class="com.library.model.ApplyInfo"/>
+    
+    <bean id="applyInfoDao" class="com.library.dao.impl.ApplyInfoDaoImpl">
+        <property name="sqlSessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="applyInfoService" class="com.library.service.impl.ApplyInfoServiceImpl">
+        <property name="applyInfoDao" ref="applyInfoDao"></property>
+    </bean>
 </beans>

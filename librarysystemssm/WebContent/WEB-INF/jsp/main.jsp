@@ -26,7 +26,7 @@
 						<a onclick="addTab('libraryInfoPage?reader=1','图书馆信息')">图书馆信息</a>
 					</div>
 					<div align="center" style="margin-top: 10px; cursor: pointer;">
-						<a onclick="addTab('bookcasePage?reader=1','书架设置')">书架信息</a>
+						<a onclick="addTab('bookcasePage?reader=1','书架信息')">书架信息</a>
 					</div>
 					<div align="center" style="margin-top: 10px; cursor: pointer;">
 						<a onclick="addTab('bookInfoPage?reader=1','图书信息')">图书信息</a>
@@ -79,7 +79,7 @@
 						<a onclick="addTab('bookInfoPage?reader=0','图书档案管理')">图书档案管理</a>
 					</div>
 				</div>
-				<div title="图书借还处理" style="padding: 10px;">
+				<div title="读者申请处理" style="padding: 10px;">
 					<div align="center" style="margin-top: 10px; cursor: pointer;">
 						<a onclick="addTab('delBorrowInfoPage','图书借阅处理 ')">图书借阅处理</a>
 					</div>
@@ -88,6 +88,9 @@
 					</div>
 					<div align="center" style="margin-top: 10px; cursor: pointer;">
 						<a onclick="addTab('delGiveBackInfoPage','图书归还处理')">图书归还处理</a>
+					</div>
+					<div align="center" style="margin-top: 10px; cursor: pointer;">
+						<a onclick="addTab('delApplyInfoPage','办证证申请处理')">办证申请处理</a>
 					</div>
 				</div>
 				<div title="系统查询" style="padding: 10px;">

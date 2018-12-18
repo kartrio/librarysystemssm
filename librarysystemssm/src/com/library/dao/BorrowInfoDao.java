@@ -17,4 +17,7 @@ public interface BorrowInfoDao {
 
 	//新增借阅信息
 	void addBorrowInfo(Map<String, Object> clauseMap);
+
+	//删除借阅信息
+	void deleteBorrowInfo(Integer id);
 }

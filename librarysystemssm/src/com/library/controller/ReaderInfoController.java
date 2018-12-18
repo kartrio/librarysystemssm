@@ -20,7 +20,7 @@ public class ReaderInfoController {
 
 	@Autowired
 	private ReaderService readerService;
-
+	
 	/**
 	 * 跳转到读者信息页面
 	 * @param manager
@@ -88,6 +88,7 @@ public class ReaderInfoController {
 			result.setSuccess(false);
 		}
 		result.setData(readerInfo);
+		System.out.println(readerInfo);
 		return result;
 	}
 	
@@ -134,4 +135,5 @@ public class ReaderInfoController {
 	    readerService.deleteReaderInfo(id);
 		return "redirect:findReaderInfo?page=" + page + "&rows=" + rows;
 	}
+	
 }

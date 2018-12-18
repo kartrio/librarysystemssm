@@ -14,8 +14,6 @@
 	href="${APP_PATH }/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${APP_PATH }/css/font-awesome.min.css">
 <link rel="stylesheet" href="${APP_PATH }/css/login.css">
-<style>
-</style>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -193,6 +191,7 @@
 				}
 			});
 		}
+		
 		
 		//进行可选填内容的折叠显示
 		function showHiddenForm() {

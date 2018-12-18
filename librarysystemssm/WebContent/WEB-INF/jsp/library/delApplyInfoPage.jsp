@@ -9,7 +9,7 @@
 <script type="text/javascript">
 $(function() {
 	$('#dg').datagrid({
-		url : "findBorrowInfo?status=0",
+		url : "findApplyInfo?del=0",
 		fit : true,
 		loadMsg : 'loading',
 		singleSelect : true,
@@ -24,42 +24,6 @@ $(function() {
 			checkbox : true,
 			width : 100
 		}, {
-			field : 'barcode',
-			title : '图书条形码',
-			align : 'center',
-			width : 100,
-			formatter : function(value, row, index) {
-				if(row.bookInfo != null){
-					return row.bookInfo.barcode;
-				}else{
-					return null;
-				}
-			}
-		}, {
-			field : 'bookname',
-			title : '图书名称',
-			align : 'center',
-			width : 100,
-			formatter : function(value, row, index) {
-				if(row.bookInfo != null){
-					return row.bookInfo.bookname;
-				}else{
-					return null;
-				}
-			}
-		}, {
-			field : 'readerBarcode',
-			title : '读者条形码',
-			align : 'center',
-			width : 100,
-			formatter : function(value, row, index) {
-				if(row.readerInfo != null){
-					return row.readerInfo.barcode;
-				}else{
-					return null;
-				}
-			}
-		}, {
 			field : 'name',
 			title : '读者名称',
 			align : 'center',
@@ -72,47 +36,51 @@ $(function() {
 				}
 			}
 		}, {
-			field : 'borrowTime',
-			title : '借阅时间',
-			align : 'center',
-			width : 100
-		}, {
-			field : 'backTime',
+			field : 'del',
 			title : '应还时间',
 			align : 'center',
-			width : 100
+			width : 100,
+			formatter : function(value, row, index) {
+				if(row.del == 0){
+					return "新建";
+				}else if(del == 1){
+					return "同意";
+				}else{
+					return "不同意";
+				}
+			}
 		}] ],
 		toolbar : [ {
-			id : 'AgreeBorrow',
-			text : '同意借阅申请',
+			id : 'AgreeApply',
+			text : '同意办证申请',
 			iconCls : 'icon-ok',
-			handler : agreeBorrow
+			handler : agreeApply
 		},{
-			id : 'DisAgreeBorrow',
-			text : '拒绝借阅申请',
+			id : 'DisAgreeApply',
+			text : '拒绝办证申请',
 			iconCls : 'icon-undo',
-			handler : disagreeBorrow
-		}]
+			handler : disagreeApply
+		} ]
 	});
 })
 
-//同意借阅申请
-function agreeBorrow(){
+//同意办证
+function agreeApply(){
 	var row = $('#dg').datagrid('getSelected');
 	if (!row) {
 		$.messager.alert("系统提示", "请先选择一条记录", "info");
 		return;
 	}
 	$.ajax({
-        type : 'POST',
-        url : 'agreeBorrow',
-        data : {
-        	'id' : row.id,
-        	'operator' : $('#operator').val(),
-        	'bookid' : row.bookInfo.id,
+		type : 'POST',
+		url : 'agreeApply',
+		data : {
+			'id' : row.id,
+			'readerid' : row.readerInfo.id,
+			'operator' : $('#operator').val(),
 			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
-		    'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
-        },
+			'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
+		},
         success : function(data){
         	layer.msg("处理成功!", {time : 1000,icon : 6,shift : 2}, function() {
         		$('#dg').datagrid('loadData', data);
@@ -124,8 +92,8 @@ function agreeBorrow(){
 	});
 }
 
-//拒绝借阅申请
-function disagreeBorrow(){
+//拒绝办证申请
+function disagreeApply(){
 	var row = $('#dg').datagrid('getSelected');
 	if (!row) {
 		$.messager.alert("系统提示", "请先选择一条记录", "info");
@@ -133,18 +101,19 @@ function disagreeBorrow(){
 	}
 	$.ajax({
 		type : 'POST',
-		url : 'disagreeBorrow',
+		url : 'disagreeApply',
 		data : {
 			'id' : row.id,
 			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
-		    'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
-		},success : function(data){
-        	layer.msg("拒绝借阅申请成功!", {time : 1000,icon : 6,shift : 2}, function() {
+			'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
+		},
+        success : function(data){
+        	layer.msg("拒绝办证申请成功!", {time : 1000,icon : 6,shift : 2}, function() {
         		$('#dg').datagrid('loadData', data);
         	});
         },
 		error : function(data){
-			layer.msg("拒绝借阅申请失败!", {time : 2000,icon : 5,shift : 6}, function() {});
+			layer.msg("拒绝办证申请失败!", {time : 2000,icon : 5,shift : 6}, function() {});
 		}
 	});
 }
@@ -152,7 +121,7 @@ function disagreeBorrow(){
 </head>
 <body class="easyui-layout">
     <input type="hidden" id="operator" value="${loginUserName }">
-	<!-- 未处理借阅信息信息列表 -->
+	<!-- 办证申请信息列表 -->
 	<div data-options="region:'center',border:false"
 		style="overflow: hidden; margin-top: 5px;">
 

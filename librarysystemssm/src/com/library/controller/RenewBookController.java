@@ -26,6 +26,7 @@ public class RenewBookController {
 	public String delRenewBookPage() {
 		return "borrow/delRenewBookInfo";
 	}
+	
 	/**
 	 * 图书续借,时间为一个月
 	 * 
@@ -39,11 +40,30 @@ public class RenewBookController {
 		Date date = new Date();
 		Map<String, Object> clausesMap = new HashMap<>();
 		clausesMap.put("id", id);
-		clausesMap.put("borrowTime", date);
 		clausesMap.put("backTime", DateUtil.addDays(date, 30));
 		clausesMap.put("status", 3);
 		borrowInfoService.updateBorrowInfo(clausesMap);
 		return "redirect:findNeedBackInfo?ifback=0&readerid="+ readerid + "&status=1&page=" + page + "&rows=" + rows;
+	}
+	
+	/**
+	 * 拒绝续借申请
+	 * 
+	 * @param id
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@RequestMapping("/disrenewBook")
+	public String disrenewBook(Integer id, String operator, Integer page, Integer rows) {
+		Date date = new Date();
+		Map<String, Object> clausesMap = new HashMap<>();
+		clausesMap.put("id", id);
+		clausesMap.put("backTime", DateUtil.addDays(date, -30));
+		clausesMap.put("operator", operator);
+		clausesMap.put("status", 1);
+		borrowInfoService.updateBorrowInfo(clausesMap);
+		return "redirect:findBorrowInfo?status=3&page=" + page + "&rows=" + rows;
 	}
 	
 	/**

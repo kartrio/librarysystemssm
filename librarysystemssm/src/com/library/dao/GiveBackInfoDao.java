@@ -17,4 +17,6 @@ public interface GiveBackInfoDao {
 
 	// 修改归还信息
 	void updateGiveBackInfo(Map<String, Object> clausesMap);
+
+	void deleteGiveBackInfo(Integer id);
 }

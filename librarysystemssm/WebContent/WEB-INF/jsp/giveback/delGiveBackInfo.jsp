@@ -63,9 +63,16 @@ $(function() {
 			text : '确认归还',
 			iconCls : 'icon-ok',
 			handler : confirmGiveBack
+		},{
+			id : 'RefuseGiveBack',
+			text : '拒绝归还申请',
+			iconCls : 'icon-undo',
+			handler : refuseGiveBack
 		} ]
 	});
 })
+
+//同意归还
 function confirmGiveBack(){
 	var row = $('#dg').datagrid('getSelected');
 	if (!row) {
@@ -89,6 +96,32 @@ function confirmGiveBack(){
         },
 		error : function(data){
 			layer.msg("处理失败!", {time : 2000,icon : 5,shift : 6}, function() {});
+		}
+	});
+}
+
+//拒绝归还申请
+function refuseGiveBack(){
+	var row = $('#dg').datagrid('getSelected');
+	if (!row) {
+		$.messager.alert("系统提示", "请先选择一条记录", "info");
+		return;
+	}
+	$.ajax({
+		type : 'POST',
+        url : 'refuseGiveBack',
+        data : {
+        	'id' : row.id,
+			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
+		    'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
+        },
+        success : function(data){
+        	layer.msg("拒绝归还申请成功!", {time : 1000,icon : 6,shift : 2}, function() {
+        		$('#dg').datagrid('loadData', data);
+        	});
+        },
+		error : function(data){
+			layer.msg("拒绝归还申请失败!", {time : 2000,icon : 5,shift : 6}, function() {});
 		}
 	});
 }

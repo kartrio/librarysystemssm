@@ -40,4 +40,10 @@ public class GiveBackInfoDaoImpl implements GiveBackInfoDao {
 		sqlSession.insert("updateGiveBackInfo", clausesMap);
 	}
 
+	@Override
+	public void deleteGiveBackInfo(Integer id) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		sqlSession.delete("deleteGiveBackInfo", id);		
+	}
+
 }

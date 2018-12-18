@@ -77,7 +77,7 @@ $(function() {
 			id : 'BookInfoAdd',
 			text : '增加',
 			iconCls : 'icon-add',
-			handler : add
+			handler : addBookInfo
 		}, '-', {
 			id : 'BookInfoUpdate',
 			text : '编辑',
@@ -116,12 +116,12 @@ function query() {
 }
 
 // 点击新增按钮触发
-function add() {
+function addBookInfo() {
 	opType = "add";
 	$('#addBookInfo').dialog({
 		title : "新增书籍",
 		cache : false,
-		href : 'jsp/book/addBookInfo.jsp',
+		href : 'addBookInfoPage',
 		modal : true
 	});
 	$('#addBookInfo').dialog('open');

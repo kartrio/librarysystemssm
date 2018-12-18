@@ -40,7 +40,8 @@
 			data : $('#frmManager').serializeArray(),
 			success : function(result){
 				if(result.success){
-					layer.msg("修改成功!", {time : 1000,icon : 6,shift : 2}, function() {
+					layer.msg("修改成功,请重新登录!", {time : 1000,icon : 6,shift : 2}, function() {
+						parent.window.location.href = "loginPage";
 					});
 			  }else{
 					layer.msg(result.data, {time : 2000,icon : 5,shift : 6}, function() {});

@@ -21,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result property="operator" column="operator"/>
       <result property="remark" column="remark"/>
       <result property="status" column="status"/>
+      <result property="libraryCard" column="libraryCard"/>
       
       <!-- 与ReadType建立关联 -->
       <association property="readerType" javaType="ReaderType">

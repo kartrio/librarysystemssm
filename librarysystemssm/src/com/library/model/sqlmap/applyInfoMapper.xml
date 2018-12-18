@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.model.sqlmap.applyInfoMapper">
+	
+	<!-- 查询结果 -->
+ 	<resultMap type="ApplyInfo" id="applyInfoMap">
+	    <id property="id" column="id"/>
+	    <result property="del" column="del"/>
+	    <result property="operator" column="operator"/>
+	    <association property="readerInfo" javaType="ReaderInfo">
+	         <id property="id" column="readerid"/>
+	         <result property="name" column="rname"/>   
+	    </association>
+	</resultMap> 
+
+	<!-- 获取办证信息 -->
+	<select id="getApplyInfo" resultMap="applyInfoMap">
+		SELECT a.*,r.name rname 
+		FROM tb_applyInfo a
+		LEFT JOIN tb_reader r ON a.readerid = r.id
+		<where>
+		  <if test="del != null">
+		   del = #{del}
+		  </if>
+		</where>
+		<if test="startRow != null and rows != null">
+			LIMIT #{startRow},#{rows}
+		</if>
+	</select>
+
+	<!-- 根据条件获取办证信息总数目 -->
+	<select id="getApplyInfoCount" resultType="int">
+		SELECT COUNT(*) FROM tb_applyInfo
+		<where>
+		   <if test="del != null">
+		       del = #{del}
+		   </if>
+		</where>
+	</select>
+	
+	<!-- 修改办证信息 -->
+	<update id="updateApplyInfo">
+		UPDATE tb_applyInfo
+		SET del = #{del},operator=#{operator}
+		WHERE id = #{id}
+	</update>
+
+	<!-- 插入办证信息 -->
+	<insert id="insertApplyInfo" parameterType="ApplyInfo">
+		INSERT INTO tb_applyInfo(readerid,del)
+		VALUES(#{readerInfo.id},#{del})
+	</insert>
+
+	<!-- 删除办证信息 -->
+	<delete id="deleteApplyInfo" parameterType="int">
+		DELETE FROM tb_applyInfo WHERE id = #{id}
+	</delete>
+</mapper>

@@ -49,6 +49,11 @@ public class BookInfoController {
 		return "book/findBookInfo";
 	}
 
+	@RequestMapping("/addBookInfoPage")
+	public String addBookInfoPage(){
+		return "book/addBookInfo";
+		
+	}
 	/**
 	 * 获取包含了id和typename的书籍类别信息
 	 * 

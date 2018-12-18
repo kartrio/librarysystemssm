@@ -47,7 +47,7 @@
 				</tr>
 				<tr>
 				    <td>翻译者:</td>
-					<td><input class="easyui-numberbox" name="translator" /></td>
+					<td><input class="easyui-textbox" name="translator" /></td>
 					<td>页数:</td>
 					<td><input class="easyui-numberbox" name="page" /></td>
 				</tr>

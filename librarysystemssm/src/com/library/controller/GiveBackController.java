@@ -130,7 +130,8 @@ public class GiveBackController {
 		borrowMap.put("id", id);
 		borrowMap.put("ifback", 1);
 		borrowInfoService.updateBorrowInfo(borrowMap);
-		return "redirect:findNeedBackInfo?page=" + page + "&rows=" + rows;
+		return "redirect:findNeedBackInfo?ifback=0&readerid=" + readerid + "&status=1&page=" 
+		+ page + "&rows=" + rows;
 	}
 	
 	/**
@@ -153,6 +154,19 @@ public class GiveBackController {
 		bookInfoMap.put("id", bookid);
 		bookInfoMap.put("del", 0);
 		bookInfoService.editBookInfo(bookInfoMap);
-		return "redirect:findNeedBackInfo?status=2&page=" + page + "&rows=" + rows;
+		return "redirect:findGiveBackInfo?status=2&page=" + page + "&rows=" + rows;
+	}
+	
+	/**
+	 * 拒绝归还申请
+	 * @param id
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@RequestMapping("/refuseGiveBack")
+	public String refuseGiveBack(Integer id, Integer page, Integer rows){
+		giveBackInfoService.deleteGiveBackInfo(id);
+		return "redirect:findGiveBackInfo?status=2&page=" + page + "&rows=" + rows;
 	}
 }

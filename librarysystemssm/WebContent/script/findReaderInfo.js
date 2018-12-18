@@ -225,12 +225,12 @@ function agreeRegister(){
 		url : 'agreeRegister',
 		data : {
 			'id' : row.id,
-			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
-		    'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
+			'page' : $('#readerDg').datagrid('getPager').data("pagination").options.pageNumber,
+		    'rows' : $('#readerDg').datagrid('getPager').data("pagination").options.pageSize
 		},
 		success : function(result){
 			layer.msg("确认成功!", {time : 2000,icon : 6,shift : 2}, function() {
-				$('#dg').datagrid("loadData",result);				
+				$('#readerDg').datagrid("loadData",result);				
 			});
 		},
 		error : function(data){

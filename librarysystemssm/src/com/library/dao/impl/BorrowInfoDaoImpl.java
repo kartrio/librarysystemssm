@@ -30,14 +30,20 @@ public class BorrowInfoDaoImpl implements com.library.dao.BorrowInfoDao {
 
 	@Override
 	public void updateBorrowInfo(Map<String, Object> clausesMap) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		sqlSession.update("updateBorrowInfo", clausesMap);
 	}
 
 	@Override
 	public void addBorrowInfo(Map<String, Object> clauseMap) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		sqlSession.update("insertBorrowInfo", clauseMap);
+	}
+
+	@Override
+	public void deleteBorrowInfo(Integer id) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		sqlSession.delete("deleteBorrowInfo", id);
 	}
 
 }

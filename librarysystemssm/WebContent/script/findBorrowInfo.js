@@ -2,7 +2,7 @@ var opType; // 操作类型
 // 页面加载成功时执行
 $(function() {
 	$('#dg').datagrid({
-		url : "findBorrowInfo",
+		url : 'findBorrowInfo',
 		fit : true,
 		loadMsg : 'loading',
 		singleSelect : true,
@@ -89,9 +89,20 @@ $(function() {
 		}] ]
 	});
 
+	//判断是否是借阅到期提醒的请求,如果是加载未归还的图书借阅信息
     var source = $('#source').val();
     if(source != 0){
     	$('#layout').layout("remove","north");
+    	$.ajax({
+    		type : 'POST',
+    		url : 'findBorrowInfo',
+    		data : {
+    			ifback : 0
+    		},
+    		success : function(result){
+    			$('#dg').datagrid('loadData',result);
+    		}
+    	});
     }
 })
 

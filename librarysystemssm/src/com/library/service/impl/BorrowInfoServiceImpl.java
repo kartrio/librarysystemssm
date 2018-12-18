@@ -38,4 +38,9 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
 		borrowInfoDao.addBorrowInfo(clauseMap);
 	}
 
+	@Override
+	public void deleteBorrowInfo(Integer id) {
+		borrowInfoDao.deleteBorrowInfo(id);
+	}
+
 }

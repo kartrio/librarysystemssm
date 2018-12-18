@@ -84,12 +84,19 @@ $(function() {
 		}] ],
 		toolbar : [ {
 			id : 'AgreeRenew',
-			text : '同意续借',
+			text : '同意续借申请',
 			iconCls : 'icon-ok',
 			handler : agreeRenew
+		},{
+			id : 'DisAgreeRenew',
+			text : '拒绝续借申请',
+			iconCls : 'icon-undo',
+			handler : disagreeRenew
 		} ]
 	});
 })
+
+//同意续借申请
 function agreeRenew(){
 	var row = $('#dg').datagrid('getSelected');
 	if (!row) {
@@ -115,11 +122,38 @@ function agreeRenew(){
 		}
 	});
 }
+
+//拒绝续借申请
+function disagreeRenew(){
+	var row = $('#dg').datagrid('getSelected');
+	if (!row) {
+		$.messager.alert("系统提示", "请先选择一条记录", "info");
+		return;
+	}
+	$.ajax({
+		type : 'POST',
+        url : 'disagreeRenew',
+        data : {
+        	'id' : row.id,
+        	'operator' : $('#operator').val(),
+			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
+		    'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
+        },
+        success : function(data){
+        	layer.msg("拒绝续借申请成功!", {time : 1000,icon : 6,shift : 2}, function() {
+        		$('#dg').datagrid('loadData', data);
+        	});
+        },
+		error : function(data){
+			layer.msg("拒绝续借申请失败!", {time : 2000,icon : 5,shift : 6}, function() {});
+		}
+	});
+}
 </script>
 </head>
 <body class="easyui-layout">
     <input type="hidden" id="operator" value="${loginUserName }">
-	<!-- 未处理借阅信息信息列表 -->
+	<!-- 未处理借阅信息列表 -->
 	<div data-options="region:'center',border:false"
 		style="overflow: hidden; margin-top: 5px;">
 
