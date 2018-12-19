@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * 归还书籍信息实体类
+ * 
  * @author Administrator
  *
  */
@@ -11,8 +12,10 @@ public class GiveBackInfo {
 	private int id;
 	private Date backTime;
 	private String operator;
+	private int status;
 	private ReaderInfo readerInfo;
 	private BookInfo bookInfo;
+	private BorrowInfo borrowInfo;
 
 	public int getId() {
 		return this.id;
@@ -54,8 +57,26 @@ public class GiveBackInfo {
 		this.bookInfo = bookInfo;
 	}
 
-	public String toString() {
-		return "GiveBackInfo [id=" + this.id + ", backTime=" + this.backTime + ", operator=" + this.operator
-				+ ", readerInfo=" + this.readerInfo + ", bookInfo=" + this.bookInfo + "]";
+	public int getStatus() {
+		return status;
 	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public BorrowInfo getBorrowInfo() {
+		return borrowInfo;
+	}
+
+	public void setBorrowInfo(BorrowInfo borrowInfo) {
+		this.borrowInfo = borrowInfo;
+	}
+
+	@Override
+	public String toString() {
+		return "GiveBackInfo [id=" + id + ", backTime=" + backTime + ", operator=" + operator + ", status=" + status
+				+ ", readerInfo=" + readerInfo + ", bookInfo=" + bookInfo + ", borrowInfo=" + borrowInfo + "]";
+	}
+
 }

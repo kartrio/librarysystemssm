@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="backTime" column="backTime" />
 		<result property="operator" column="operator" />
 		<result property="ifback" column="ifback" />
+		<result property="status" column="status" />
 
 		<!-- 与ReaderInfo建立关联 -->
 		<association property="readerInfo" javaType="ReaderInfo">
@@ -60,7 +61,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			    AND borrowTime BETWEEN #{fromTime} AND #{toTime}
 			</if>
 			<if test="status != null">
-				AND bo.status = #{status}
+			    <if test="status == 1">
+			       AND bo.status in (#{status},5,6)
+			    </if>
+				<if test="status != 1">
+				   AND bo.status = #{status}
+				</if>
 			</if>
 			<if test="ifback != null">
 			    AND ifback = #{ifback}
@@ -88,7 +94,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			    AND borrowTime BETWEEN #{fromTime} AND #{toTime}
 			</if>
 			<if test="status != null">
-				AND status = #{status}
+				 <if test="status == 1">
+			       AND status in (#{status},5,6)
+			    </if>
+				<if test="status != 1">
+				   AND status = #{status}
+				</if>
 			</if>
 			<if test="ifback != null">
 			    AND ifback = #{ifback}

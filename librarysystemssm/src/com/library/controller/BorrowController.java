@@ -19,28 +19,34 @@ import com.library.util.DateUtil;
 
 @Controller
 public class BorrowController {
-	
+
 	@Autowired
 	private BorrowInfoService borrowInfoService;
-	
+
 	@Autowired
 	private BookInfoService bookInfoService;
-	
+
 	@RequestMapping("/borrowBookPage")
-    public String borrowBookPage(){
-    	return "borrow/borrowBook";
-    }
-	
+	public String borrowBookPage() {
+		return "borrow/borrowBook";
+	}
+
 	@RequestMapping("/borrowInfoPage")
-    public String borrowInfoPage(Integer source, Model model){
+	public String borrowInfoPage(Integer source, Model model) {
 		model.addAttribute("source", source);
-    	return "book/findBorrowInfo";
-    }
-	
+		return "book/findBorrowInfo";
+	}
+
 	@RequestMapping("/delBorrowInfoPage")
-	public String delBorrowInfoPage(){
+	public String delBorrowInfoPage() {
 		return "borrow/delBorrowInfo";
 	}
+	
+	@RequestMapping("/findAllBorrowBookInfo")
+	public String findAllBorrowBookInfo() {
+		return "borrow/findAllBorrowBookInfo";
+	}
+
 	/**
 	 * 分页查询图书借阅信息
 	 * 
@@ -48,11 +54,10 @@ public class BorrowController {
 	 */
 	@ResponseBody
 	@RequestMapping("/findBorrowInfo")
-	public Object findBorrowInfo(String barcode, String fromTime, 
-			String toTime, Integer status, Integer ifback,
-			@RequestParam(required=false,defaultValue="1")Integer page, 
-			@RequestParam(required=false,defaultValue="8")Integer rows) {
-		int startRow = (page - 1) * rows; 
+	public Object findBorrowInfo(String barcode, String fromTime, String toTime, Integer status, Integer ifback,
+			@RequestParam(required = false, defaultValue = "1") Integer page,
+			@RequestParam(required = false, defaultValue = "8") Integer rows) {
+		int startRow = (page - 1) * rows;
 		Map<String, Object> clausesMap = new HashMap<>();
 		clausesMap.put("barcode", barcode);
 		clausesMap.put("fromTime", fromTime);
@@ -62,62 +67,77 @@ public class BorrowController {
 		clausesMap.put("status", status);
 		clausesMap.put("ifback", ifback);
 		Map<String, Object> pages = new HashMap<String, Object>();
-		
+
 		try {
 			List<BorrowInfo> borrowInfoList = borrowInfoService.getBorrowInfo(clausesMap);
 			int count = borrowInfoService.getBorrowInfoCount(clausesMap);
 			pages.put("total", count);
-		    pages.put("rows", borrowInfoList);
+			pages.put("rows", borrowInfoList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return pages;
-	} 
-	
+	}
+
 	/**
 	 * 同意借阅
+	 * 
 	 * @param id
 	 * @param operator
 	 * @return
 	 */
 	@RequestMapping("/agreeBorrow")
-	public String agreeBorrow(Integer id, Integer bookid, String operator, Integer page, Integer rows){
-		//更新借阅信息
+	public String agreeBorrow(Integer id, Integer bookid, String operator, Integer page, Integer rows) {
+		// 更新借阅信息
 		Map<String, Object> clausesMap = new HashMap<>();
 		clausesMap.put("id", id);
 		clausesMap.put("operator", operator);
 		clausesMap.put("status", 1);
 		borrowInfoService.updateBorrowInfo(clausesMap);
-		
-		//更新图书信息
+
+		// 更新图书信息
 		Map<String, Object> bookMap = new HashMap<>();
 		bookMap.put("id", bookid);
 		bookMap.put("del", 1);
 		bookInfoService.editBookInfo(bookMap);
 		return "redirect:findBorrowInfo?status=0&page=" + page + "&rows=" + rows;
 	}
-	
+
 	/**
-	 * 拒绝解约申请
+	 * 拒绝借阅申请
+	 * 
 	 * @param id
 	 * @param page
 	 * @param rows
 	 * @return
 	 */
 	@RequestMapping("/disagreeBorrow")
-	public String disagreeBorrow(Integer id, Integer page, Integer rows){
-		borrowInfoService.deleteBorrowInfo(id);
+	public String disagreeBorrow(Integer id,Integer bookid, String operator, Integer page, Integer rows) {
+		// 更新借阅信息
+		Map<String, Object> clausesMap = new HashMap<>();
+		clausesMap.put("id", id);
+		clausesMap.put("operator", operator);
+		clausesMap.put("status", 4);
+		borrowInfoService.updateBorrowInfo(clausesMap);
+
+		// 更新图书信息
+		Map<String, Object> bookMap = new HashMap<>();
+		bookMap.put("id", bookid);
+		bookMap.put("del", 0);
+		bookInfoService.editBookInfo(bookMap);
 		return "redirect:findBorrowInfo?status=0&page=" + page + "&rows=" + rows;
 	}
+
 	/**
 	 * 借阅书籍
+	 * 
 	 * @param readerid
 	 * @param bookid
 	 * @param days
 	 * @return
 	 */
 	@RequestMapping("/borrowBook")
-	public String borrowBook(Integer readerid, Integer bookid, Integer days, Integer page, Integer rows){
+	public String borrowBook(Integer readerid, Integer bookid, Integer days, Integer page, Integer rows) {
 		Date now = new Date();
 		Map<String, Object> clauseMap = new HashMap<>();
 		clauseMap.put("readerid", readerid);

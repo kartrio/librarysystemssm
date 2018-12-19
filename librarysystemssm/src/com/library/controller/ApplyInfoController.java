@@ -109,7 +109,7 @@ public class ApplyInfoController {
 		
 		Map<String, Object> readerMap = new HashMap<>();
 		readerMap.put("id", readerid);
-		readerMap.put("libaryCard", GenerateBarcode.generBarcode());
+		readerMap.put("libraryCard", GenerateBarcode.generBarcode());
 		readerService.updateReaderInfo(readerMap);
 		return "redirect:findApplyInfo?page=" + page + "&rows=" + rows + "&del=0";
 	}
@@ -122,8 +122,12 @@ public class ApplyInfoController {
 	 * @return
 	 */
 	@RequestMapping("/disagreeApply")
-	public String disagreeApply(Integer id, Integer page, Integer rows){
-		applyInfoService.deleteApplyInfo(id);
+	public String disagreeApply(Integer id,String operator, Integer page, Integer rows){
+		Map<String, Object> clausesMap = new HashMap<>();
+		clausesMap.put("id", id);
+		clausesMap.put("del", 3);
+		clausesMap.put("operator", operator);
+		applyInfoService.updateApplyInfo(clausesMap);
 		return "redirect:findApplyInfo?page=" + page + "&rows=" + rows + "&del=0";
 	}
 }

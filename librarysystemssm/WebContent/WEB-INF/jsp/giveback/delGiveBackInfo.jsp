@@ -9,7 +9,7 @@
 <script type="text/javascript">
 $(function() {
 	$('#dg').datagrid({
-		url : "findGiveBackInfo?status=2",
+		url : "findGiveBackInfo?status=0",
 		fit : true,
 		loadMsg : 'loading',
 		singleSelect : true,
@@ -86,6 +86,7 @@ function confirmGiveBack(){
         	'id' : row.id,
         	'operator' : $('#operator').val(),
         	'bookid' : row.bookInfo.id,
+        	'borrowid' : row.borrowInfo.id,
 			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
 		    'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
         },
@@ -112,6 +113,8 @@ function refuseGiveBack(){
         url : 'refuseGiveBack',
         data : {
         	'id' : row.id,
+        	'operator' : $('#operator').val(),
+        	'borrowid' : row.borrowInfo.id,
 			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
 		    'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
         },

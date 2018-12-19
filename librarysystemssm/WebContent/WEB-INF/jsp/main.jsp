@@ -44,6 +44,14 @@
 							<a onclick="addTab('giveBackPage','图书归还')">图书归还</a>
 						</div>
 					</div>
+					<div title="借还信息查询" style="padding: 10px;">
+						<div align="center" style="margin-top: 10px; cursor: pointer;">
+							<a onclick="addTab('findAllBorrowBookInfo','借阅信息查询')">借阅信息查询</a>
+						</div>
+						<div align="center" style="margin-top: 10px; cursor: pointer;">
+							<a onclick="addTab('findAllGiveBackInfo','归还信息查询')">归还信息查询</a>
+						</div>
+					</div>
 				</c:if>
 
 			</c:if>
@@ -90,7 +98,7 @@
 						<a onclick="addTab('delGiveBackInfoPage','图书归还处理')">图书归还处理</a>
 					</div>
 					<div align="center" style="margin-top: 10px; cursor: pointer;">
-						<a onclick="addTab('delApplyInfoPage','办证证申请处理')">办证申请处理</a>
+						<a onclick="addTab('delApplyInfoPage','办证申请处理')">办证申请处理</a>
 					</div>
 				</div>
 				<div title="系统查询" style="padding: 10px;">

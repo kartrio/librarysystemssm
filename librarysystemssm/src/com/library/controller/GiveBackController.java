@@ -44,6 +44,11 @@ public class GiveBackController {
 	public String delGiveBackInfoPage() {
 		return "giveback/delGiveBackInfo";
 	}
+	
+	@RequestMapping("/findAllGiveBackInfo")
+	public String findAllGiveBackInfo() {
+		return "giveback/findAllGiveBackInfo";
+	}
 	/**
 	 * 查询当前用户需要归还的书籍信息
 	 * 
@@ -75,7 +80,6 @@ public class GiveBackController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(pages);
 		return pages;
 	}
 	
@@ -106,7 +110,6 @@ public class GiveBackController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(pages);
 		return pages;
 	}
 	
@@ -124,11 +127,12 @@ public class GiveBackController {
 		clausesMap.put("readerid", readerid);
 		clausesMap.put("bookid", bookid);
 		clausesMap.put("backTime", new Date());
-		clausesMap.put("status", 2);
+		clausesMap.put("status", 0);
+		clausesMap.put("borrowid", id);
 		giveBackInfoService.insertGiveBackInfo(clausesMap);
 		Map<String, Object> borrowMap = new HashMap<>();
 		borrowMap.put("id", id);
-		borrowMap.put("ifback", 1);
+		borrowMap.put("status", 2);
 		borrowInfoService.updateBorrowInfo(borrowMap);
 		return "redirect:findNeedBackInfo?ifback=0&readerid=" + readerid + "&status=1&page=" 
 		+ page + "&rows=" + rows;
@@ -144,17 +148,21 @@ public class GiveBackController {
 	 * @return
 	 */
 	@RequestMapping("/confirmGiveBack")
-	public String confirmGiveBack(Integer id, Integer bookid,String operator, Integer page, Integer rows){
+	public String confirmGiveBack(Integer id,Integer borrowid, Integer bookid,String operator, Integer page, Integer rows){
 		Map<String, Object> clausesMap = new HashMap<>();
 		clausesMap.put("id", id);
 		clausesMap.put("operator", operator);
 		clausesMap.put("status", 1);
 		giveBackInfoService.updateGiveBackInfo(clausesMap);
+		Map<String, Object> borrowMap = new HashMap<>();
+		borrowMap.put("id", borrowid);
+		borrowMap.put("ifback", 1);
+		borrowInfoService.updateBorrowInfo(borrowMap);
 		Map<String, Object> bookInfoMap = new HashMap<>();
 		bookInfoMap.put("id", bookid);
 		bookInfoMap.put("del", 0);
 		bookInfoService.editBookInfo(bookInfoMap);
-		return "redirect:findGiveBackInfo?status=2&page=" + page + "&rows=" + rows;
+		return "redirect:findGiveBackInfo?status=0&page=" + page + "&rows=" + rows;
 	}
 	
 	/**
@@ -165,8 +173,16 @@ public class GiveBackController {
 	 * @return
 	 */
 	@RequestMapping("/refuseGiveBack")
-	public String refuseGiveBack(Integer id, Integer page, Integer rows){
-		giveBackInfoService.deleteGiveBackInfo(id);
+	public String refuseGiveBack(Integer id,Integer borrowid, String operator, Integer page, Integer rows){
+		Map<String, Object> clausesMap = new HashMap<>();
+		clausesMap.put("id", id);
+		clausesMap.put("operator", operator);
+		clausesMap.put("status", 4);
+		giveBackInfoService.updateGiveBackInfo(clausesMap);
+		Map<String, Object> borrowMap = new HashMap<>();
+		borrowMap.put("id", borrowid);
+		borrowMap.put("status", 6);
+		borrowInfoService.updateBorrowInfo(borrowMap);
 		return "redirect:findGiveBackInfo?status=2&page=" + page + "&rows=" + rows;
 	}
 }

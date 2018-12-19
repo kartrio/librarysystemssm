@@ -37,7 +37,7 @@ $(function() {
 			}
 		}, {
 			field : 'del',
-			title : '应还时间',
+			title : '处理结果',
 			align : 'center',
 			width : 100,
 			formatter : function(value, row, index) {
@@ -104,6 +104,7 @@ function disagreeApply(){
 		url : 'disagreeApply',
 		data : {
 			'id' : row.id,
+			'operator' : $('#operator').val(),
 			'page' : $('#dg').datagrid('getPager').data("pagination").options.pageNumber,
 			'rows' : $('#dg').datagrid('getPager').data("pagination").options.pageSize
 		},

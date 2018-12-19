@@ -48,20 +48,20 @@ public class RenewBookController {
 	
 	/**
 	 * 拒绝续借申请
-	 * 
+	 * 存在问题
 	 * @param id
 	 * @param page
 	 * @param rows
 	 * @return
 	 */
-	@RequestMapping("/disrenewBook")
-	public String disrenewBook(Integer id, String operator, Integer page, Integer rows) {
+	@RequestMapping("/disagreeRenew")
+	public String disagreeRenew(Integer id, String operator, Integer page, Integer rows) {
 		Date date = new Date();
 		Map<String, Object> clausesMap = new HashMap<>();
 		clausesMap.put("id", id);
 		clausesMap.put("backTime", DateUtil.addDays(date, -30));
 		clausesMap.put("operator", operator);
-		clausesMap.put("status", 1);
+		clausesMap.put("status", 5);
 		borrowInfoService.updateBorrowInfo(clausesMap);
 		return "redirect:findBorrowInfo?status=3&page=" + page + "&rows=" + rows;
 	}

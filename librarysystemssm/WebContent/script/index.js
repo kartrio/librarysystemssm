@@ -8,6 +8,7 @@ $(function(){
 		}, function() {
 		});
 	}
+	
 })
 
 /**
@@ -22,9 +23,28 @@ function addTab(tabPath, tabTitle) {
 			id : tabId,
 			title : tabTitle,
 			content : "<iframe src='"+tabPath+"' frameborder='no' border='0' style='width:100%;height:100%'></iframe>",
-			closable : true
+			closable : true,
+			tools:[{
+					iconCls:'icon-mini-refresh',
+					handler:function(){
+						var selectedTab = $('#tab').tabs('getSelected');
+						$('#tab').tabs('update', {
+							tab: selectedTab,
+							options: {
+								content : "<iframe src='"+tabPath+"' frameborder='no' border='0' style='width:100%;height:100%'></iframe>"
+							}
+						});
+					}
+			}]
 	    });
 	}else{
 		$('#tab').tabs('select', tabTitle);
+		var selectedTab = $('#tab').tabs('getSelected');
+		$('#tab').tabs('update', {
+			tab: selectedTab,
+			options: {
+				content : "<iframe src='"+tabPath+"' frameborder='no' border='0' style='width:100%;height:100%'></iframe>"
+			}
+		});
 	}
 }

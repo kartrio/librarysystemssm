@@ -8,7 +8,7 @@ package com.library.model;
  */
 public class ApplyInfo {
 	private int id;
-	private int del; //处理意见: 0 -- 新建 , 1 -- 同意 , 2 -- 不同意
+	private int del; //处理意见: 0 -- 新建 , 1 -- 同意 , 2 -- 不同意, 3 -- 拒绝
 	private ReaderInfo readerInfo;
 	private String operator;
 	

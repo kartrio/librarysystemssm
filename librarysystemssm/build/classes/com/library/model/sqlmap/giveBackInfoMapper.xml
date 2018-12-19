@@ -9,7 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id property="id" column="id" />
 		<result property="backTime" column="backTime" />
 		<result property="operator" column="operator" />
-
+		<result property="status" column="status" />
+		
 		<!-- 与ReaderInfo建立关联 -->
 		<association property="readerInfo" javaType="ReaderInfo">
 			<id property="id" column="readerid" />
@@ -21,6 +22,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<id property="id" column="bookid" />
 			<result property="bookname" column="bookname" />
 		</association>
+		
+		<!-- 与BorrowInfo建立关联 -->
+		<association property="borrowInfo" javaType="BorrowInfo">
+			<id property="id" column="borrowid" />
+		</association>
 	</resultMap>
 
 	<!-- 分页查询所有具有指定条件的归还信息 ,参数类型为map -->
@@ -29,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM tb_giveback g
 		LEFT JOIN tb_reader r ON g.readerid = r.id
 		LEFT JOIN tb_bookinfo bi ON g.bookid = bi.id
+		LEFT JOIN tb_borrow bo ON g.borrowid = bo.id
 		<where>
 			<if test="readerid != null">
 				readerid = #{readerid}
