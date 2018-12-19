@@ -6,7 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
    <!-- 查询出版社信息 -->
    <select id="getPublishInfo" resultType="PublishInfo">
-      SELECT * FROM tb_publishing 
+      SELECT * FROM tb_publishing
+      <if test="startRow != null and rows != null">
+          LIMIT #{startRow},#{rows}
+      </if> 
+   </select>
+   
+   <!-- 查询出版社信息总数 -->
+   <select id="getPublishInfoCount" resultType="int">
+      SELECT COUNT(*) FROM tb_publishing
    </select>
    
    <!-- 修改出版社信息 -->
@@ -23,6 +31,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 删除出版社信息 -->
     <delete id="deletePublishInfo" parameterType="java.lang.String">
-          DELETE FROM tb_publishing WHERE ISBN = #{pubname}
+          DELETE FROM tb_publishing WHERE ISBN = #{_parameter}
     </delete>
 </mapper>
