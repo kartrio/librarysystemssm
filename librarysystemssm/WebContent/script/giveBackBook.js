@@ -62,18 +62,6 @@ $(function() {
 					return null;
 				}
 			}
-		}, {
-			field : 'price',
-			title : '定价',
-			align : 'center',
-			width : 100,
-			formatter : function(value, row, index) {
-				if(row.bookInfo != null){
-					return row.bookInfo.price;
-				}else{
-					return null;
-				}
-			}
 		}] ],
 		toolbar : [ {
 			id : 'GiveBackBook',

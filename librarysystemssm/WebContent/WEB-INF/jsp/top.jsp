@@ -9,13 +9,13 @@
 		
 		<div id="userMenu" style="width:150px;">
 		   <div data-options="iconCls:'icon-man'">
-		   <a onclick="addTab('userInfoPage?role=${role}','个人信息')">个人信息</a>
+		   		<a class="easyui-linkbutton" plain="true" onclick="addTab('userInfoPage?role=${role}','个人信息')">个人信息</a>
 		   </div>
 		   <div data-options="iconCls:'icon-lock'">
-		       <a onclick="addTab('updatePwdPage','更改口令')">更改口令</a>
+		       <a class="easyui-linkbutton" plain="true" onclick="addTab('updatePwdPage','更改口令')">更改口令</a>
            </div>
 		   <div data-options="iconCls:'icon-back'">
-		       <a href="${APP_PATH }/logout" style="color: black">安全退出</a>
+		       <a class="easyui-linkbutton" plain="true" href="${APP_PATH }/logout" style="color: black">安全退出</a>
 		   </div>
 		</div>
 	</div>

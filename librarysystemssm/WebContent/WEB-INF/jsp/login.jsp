@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="${APP_PATH }/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${APP_PATH }/css/font-awesome.min.css">
 <link rel="stylesheet" href="${APP_PATH }/css/login.css">
-<link rel="stylesheet" href="${APP_PATH }/css/index.css">
 <style>
 </style>
 </head>

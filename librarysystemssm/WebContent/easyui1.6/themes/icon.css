@@ -94,12 +94,36 @@
 .icon-large-chart{
 	background:url('icons/large_chart.png') no-repeat center center;
 }
-.icon-set{
-	background:url('icons/set.png') no-repeat center center;
-}
 .icon-book{
 	background:url('icons/book.png') no-repeat center center;
 }
 .icon-new-tip{
 	background:url('icons/new-tip.png') no-repeat center center;
+}
+.icon-system{
+	background:url('icons/system.png') no-repeat center center;
+}
+.icon-directory{
+	background:url('icons/directory.png') no-repeat center center;
+}
+.icon-manager{
+	background:url('icons/manager.png') no-repeat center center;
+}
+.icon-file{
+	background:url('icons/file.png') no-repeat center center;
+}
+.icon-library{
+	background:url('icons/library.png') no-repeat center center;
+}
+.icon-bookcase{
+	background:url('icons/bookcase.png') no-repeat center center;
+}
+.icon-set{
+	background:url('icons/set.png') no-repeat center center;
+}
+.icon-publish{
+	background:url('icons/publish.png') no-repeat center center;
+}
+.icon-del{
+	background:url('icons/del.png') no-repeat center center;
 }
