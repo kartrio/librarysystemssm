@@ -10,10 +10,27 @@ Target Server Type    : MYSQL
 Target Server Version : 50713
 File Encoding         : 65001
 
-Date: 2018-12-14 16:50:49
+Date: 2018-12-20 12:16:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for tb_applyinfo
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_applyinfo`;
+CREATE TABLE `tb_applyinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `readerid` int(11) DEFAULT NULL,
+  `del` tinyint(4) DEFAULT NULL,
+  `operator` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_applyinfo
+-- ----------------------------
+INSERT INTO `tb_applyinfo` VALUES ('4', '5', '1', 'tsoft');
 
 -- ----------------------------
 -- Table structure for tb_bookcase
@@ -24,7 +41,7 @@ CREATE TABLE `tb_bookcase` (
   `name` varchar(30) DEFAULT NULL,
   `Column_3` char(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_bookcase
@@ -35,9 +52,6 @@ INSERT INTO `tb_bookcase` VALUES ('4', 'B架', null);
 INSERT INTO `tb_bookcase` VALUES ('5', 'D架', null);
 INSERT INTO `tb_bookcase` VALUES ('6', 'E架', null);
 INSERT INTO `tb_bookcase` VALUES ('7', 'F架', null);
-INSERT INTO `tb_bookcase` VALUES ('8', 'G架', null);
-INSERT INTO `tb_bookcase` VALUES ('9', 'H架', null);
-INSERT INTO `tb_bookcase` VALUES ('10', 'I架', null);
 
 -- ----------------------------
 -- Table structure for tb_bookinfo
@@ -58,19 +72,26 @@ CREATE TABLE `tb_bookinfo` (
   `del` tinyint(1) DEFAULT '0',
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_bookinfo
 -- ----------------------------
-INSERT INTO `tb_bookinfo` VALUES ('9787302047230', 'Java学习指南', '1', '***', '11', '7-302', '39.00', '440', '3', '2007-11-22', 'tsoft', '0', '1');
-INSERT INTO `tb_bookinfo` VALUES ('jk', 'kjkj', '1', '***', '', '7-302', '12.00', '0', '1', '2007-11-22', 'tsoft', '1', '2');
-INSERT INTO `tb_bookinfo` VALUES ('001', '建筑测试', '4', '做做', '的', '7-302', '11.00', '11', '4', '2013-05-03', 'java1234', '0', '6');
-INSERT INTO `tb_bookinfo` VALUES ('201812111044', 'java编程基础', '1', '潘磊', null, '7-302', '38.00', '300', '3', null, null, '0', '7');
-INSERT INTO `tb_bookinfo` VALUES ('213123', 'Java1', '4', 'xxx', null, '7-302', '23.00', '1', '8', '2018-12-13', '', '0', '9');
-INSERT INTO `tb_bookinfo` VALUES ('45622', 'Java2', '1', 'sada', null, '7-302', '23.00', '1', '1', '2018-12-13', '', '0', '10');
-INSERT INTO `tb_bookinfo` VALUES ('123123', '请问', '1', '1231', null, '7-302', '12.00', '1', '1', null, null, '0', '52');
-INSERT INTO `tb_bookinfo` VALUES ('123123', '12321', '1', '21233', null, '7-302', '123.00', '1', '1', '2018-12-13', 'tsoft', '0', '53');
+INSERT INTO `tb_bookinfo` VALUES ('833198569328', '围城', '3', '钱钟书', '钱钟书', '7-302', '20.00', '0', '3', '2018-12-19', '', '0', '55');
+INSERT INTO `tb_bookinfo` VALUES ('199521030073', '追风筝的人', '3', '卡勒德·胡赛尼', '', '978-7', '25.00', '1', '3', '2018-12-19', '', '0', '56');
+INSERT INTO `tb_bookinfo` VALUES ('889965852136', '活着', '3', '余华', '余华', '978-7', '20.00', '1', '3', '2018-12-19', '', '0', '57');
+INSERT INTO `tb_bookinfo` VALUES ('635457467279', 'Java编程规范', '1', 'xxxx', '', '7-302', '40.00', '1', '4', '2018-12-19', '', '0', '58');
+INSERT INTO `tb_bookinfo` VALUES ('163510129291', 'Java编程思想', '1', 'xxxx', '', '7-302', '50.00', '1', '4', '2018-12-19', '', '0', '59');
+INSERT INTO `tb_bookinfo` VALUES ('435036505350', 'Java数据结构和算法', '1', 'xxxxx', '', '7-302', '60.00', '1', '4', '2018-12-19', '', '0', '60');
+INSERT INTO `tb_bookinfo` VALUES ('752707176020', '重构：改善既有代码的设计', '1', 'xxxx', '', '978-7', '50.00', '1', '1', '2018-12-19', '', '0', '61');
+INSERT INTO `tb_bookinfo` VALUES ('378030070939', 'XML入门经典', '1', 'xxxx', '', '7-302', '50.00', '1', '1', '2018-12-19', '', '0', '62');
+INSERT INTO `tb_bookinfo` VALUES ('216937180683', 'JavaScript权威指南', '1', 'xxx', '', '7-302', '60.00', '1', '1', '2018-12-19', '', '0', '63');
+INSERT INTO `tb_bookinfo` VALUES ('527759074498', 'Java并发编程实践', '1', 'xxx', '', '7-302', '50.00', '1', '4', '2018-12-19', '', '0', '64');
+INSERT INTO `tb_bookinfo` VALUES ('642845758570', '建筑空间组合论', '4', '彭一刚', '', '978-7', '30.00', '1', '5', '2018-12-19', '', '0', '65');
+INSERT INTO `tb_bookinfo` VALUES ('387106313966', '形式空间与秩序', '4', '程大锦', '程大锦', '978-7', '50.00', '1', '5', '2018-12-19', '', '0', '66');
+INSERT INTO `tb_bookinfo` VALUES ('701877042098', '建筑学教程1：设计原理', '4', 'xxx', '', '8-256', '80.00', '1', '5', '2018-12-19', '', '0', '67');
+INSERT INTO `tb_bookinfo` VALUES ('160100264040', '平面设计法则', '5', '德比·米尔曼', '', '978-7', '30.00', '1', '6', '2018-12-19', '', '0', '68');
+INSERT INTO `tb_bookinfo` VALUES ('876056640989', '设计心理学', '5', '唐纳德﹒A﹒诺曼', '', '7-302', '40.00', '1', '6', '2018-12-19', '', '0', '69');
 
 -- ----------------------------
 -- Table structure for tb_booktype
@@ -103,23 +124,16 @@ CREATE TABLE `tb_borrow` (
   `backTime` date DEFAULT NULL,
   `operator` varchar(30) DEFAULT NULL,
   `ifback` tinyint(1) DEFAULT '0',
-  `status` tinyint(4) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL COMMENT '0--新建,1--处理完成,2--归还,3--续借4--拒绝借阅,5--拒绝续借6--拒绝归还',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_borrow
 -- ----------------------------
-INSERT INTO `tb_borrow` VALUES ('1', '1', '1', '2007-11-22', '2007-12-22', 'tsoft', '1', '1');
-INSERT INTO `tb_borrow` VALUES ('2', '1', '2', '2007-11-26', '2007-12-26', 'tsoft', '0', '0');
-INSERT INTO `tb_borrow` VALUES ('3', '1', '1', '2007-11-26', '2007-12-26', 'tsoft', '0', '0');
-INSERT INTO `tb_borrow` VALUES ('4', '2', '6', '2007-12-29', '2007-01-08', 'tsoft', '0', '0');
-INSERT INTO `tb_borrow` VALUES ('5', '2', '1', '2007-12-29', '2008-01-28', 'tsoft', '0', '0');
-INSERT INTO `tb_borrow` VALUES ('6', '2', '7', '2007-12-29', '2008-01-28', 'tsoft', '1', '1');
-INSERT INTO `tb_borrow` VALUES ('7', '1', '6', '2013-05-03', '2013-05-23', 'java1234', '1', '1');
-INSERT INTO `tb_borrow` VALUES ('8', '1', '6', '2013-05-03', '2013-05-23', 'java1234', '1', '1');
-INSERT INTO `tb_borrow` VALUES ('9', '1', '6', '2013-05-03', '2013-05-23', 'java1234', '1', '1');
-INSERT INTO `tb_borrow` VALUES ('10', '1', '1', '2013-05-03', '2013-06-02', 'java1234', '0', '0');
+INSERT INTO `tb_borrow` VALUES ('1', '5', '55', '2018-12-20', '2019-01-24', 'tsoft', '1', '2');
+INSERT INTO `tb_borrow` VALUES ('2', '5', '58', '2018-12-20', '2019-01-19', 'tsoft', '1', '2');
+INSERT INTO `tb_borrow` VALUES ('3', '5', '59', '2018-12-20', '2019-01-19', 'tsoft', '1', '2');
 
 -- ----------------------------
 -- Table structure for tb_giveback
@@ -130,18 +144,18 @@ CREATE TABLE `tb_giveback` (
   `readerid` int(11) DEFAULT NULL,
   `bookid` int(11) DEFAULT NULL,
   `backTime` date DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
   `operator` varchar(30) DEFAULT NULL,
+  `borrowid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_giveback
 -- ----------------------------
-INSERT INTO `tb_giveback` VALUES ('1', '1', '1', '2007-11-22', 'tsoft');
-INSERT INTO `tb_giveback` VALUES ('2', '3', '3', '2007-01-03', 'Tsoft');
-INSERT INTO `tb_giveback` VALUES ('3', '1', '6', '2013-05-03', 'java1234');
-INSERT INTO `tb_giveback` VALUES ('4', '1', '6', '2013-05-03', 'java1234');
-INSERT INTO `tb_giveback` VALUES ('5', '1', '6', '2013-05-03', 'java1234');
+INSERT INTO `tb_giveback` VALUES ('1', '5', '55', '2018-12-20', '1', 'tsoft', '1');
+INSERT INTO `tb_giveback` VALUES ('2', '5', '58', '2018-12-20', '1', 'tsoft', '2');
+INSERT INTO `tb_giveback` VALUES ('3', '5', '59', '2018-12-20', '1', 'tsoft', '3');
 
 -- ----------------------------
 -- Table structure for tb_library
@@ -163,7 +177,7 @@ CREATE TABLE `tb_library` (
 -- ----------------------------
 -- Records of tb_library
 -- ----------------------------
-INSERT INTO `tb_library` VALUES ('1', '212', '4112', '6756896', 'ccsd', '123@163.com', 'http://', '2018-11-28', '是');
+INSERT INTO `tb_library` VALUES ('1', '212', '4112', '18276354736', 'ccsd', '123@163.com', 'http://', '2018-11-30', '是');
 
 -- ----------------------------
 -- Table structure for tb_manager
@@ -174,16 +188,14 @@ CREATE TABLE `tb_manager` (
   `name` varchar(30) DEFAULT NULL,
   `PWD` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_manager
 -- ----------------------------
-INSERT INTO `tb_manager` VALUES ('4', 'tsoft', '123');
+INSERT INTO `tb_manager` VALUES ('4', 'tsoft', '1234');
 INSERT INTO `tb_manager` VALUES ('6', 'java12', '1234');
 INSERT INTO `tb_manager` VALUES ('8', 'java1234', '1234');
-INSERT INTO `tb_manager` VALUES ('22', 'wgh', '1234');
-INSERT INTO `tb_manager` VALUES ('27', '的', '1234');
 
 -- ----------------------------
 -- Table structure for tb_parameter
@@ -199,43 +211,7 @@ CREATE TABLE `tb_parameter` (
 -- ----------------------------
 -- Records of tb_parameter
 -- ----------------------------
-INSERT INTO `tb_parameter` VALUES ('1', '40', '24');
-
--- ----------------------------
--- Table structure for tb_permission
--- ----------------------------
-DROP TABLE IF EXISTS `tb_permission`;
-CREATE TABLE `tb_permission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL,
-  `pid` int(11) DEFAULT NULL,
-  `url` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tb_permission
--- ----------------------------
-INSERT INTO `tb_permission` VALUES ('1', '系统菜单', '0', null);
-INSERT INTO `tb_permission` VALUES ('2', '系统设置', '1', null);
-INSERT INTO `tb_permission` VALUES ('3', '读者管理', '1', null);
-INSERT INTO `tb_permission` VALUES ('4', '图书管理', '1', null);
-INSERT INTO `tb_permission` VALUES ('5', '图书借还', '1', null);
-INSERT INTO `tb_permission` VALUES ('6', '系统查询', '1', null);
-INSERT INTO `tb_permission` VALUES ('7', '图书馆信息', '2', null);
-INSERT INTO `tb_permission` VALUES ('8', '管理员设置', '2', null);
-INSERT INTO `tb_permission` VALUES ('9', '参数设置', '2', null);
-INSERT INTO `tb_permission` VALUES ('10', '书架设置', '2', null);
-INSERT INTO `tb_permission` VALUES ('11', '读者类型管理', '3', null);
-INSERT INTO `tb_permission` VALUES ('12', '读者档案管理', '3', null);
-INSERT INTO `tb_permission` VALUES ('13', '图书类型管理', '4', null);
-INSERT INTO `tb_permission` VALUES ('14', '图书档案管理', '4', null);
-INSERT INTO `tb_permission` VALUES ('15', '图书借阅', '5', null);
-INSERT INTO `tb_permission` VALUES ('16', '图书续借', '5', null);
-INSERT INTO `tb_permission` VALUES ('17', '图书归还', '5', null);
-INSERT INTO `tb_permission` VALUES ('18', '图书档案查询', '6', null);
-INSERT INTO `tb_permission` VALUES ('19', '图书借阅查询', '6', null);
-INSERT INTO `tb_permission` VALUES ('20', '借阅到期提醒', '6', null);
+INSERT INTO `tb_parameter` VALUES ('1', '35', '24');
 
 -- ----------------------------
 -- Table structure for tb_publishing
@@ -251,6 +227,7 @@ CREATE TABLE `tb_publishing` (
 -- ----------------------------
 INSERT INTO `tb_publishing` VALUES ('7-302', '电子工业出版社');
 INSERT INTO `tb_publishing` VALUES ('978-7', '清华大学出版社');
+INSERT INTO `tb_publishing` VALUES ('8-256', '中国青年出版社');
 
 -- ----------------------------
 -- Table structure for tb_purview
@@ -292,15 +269,17 @@ CREATE TABLE `tb_reader` (
   `remark` text,
   `typeid` int(11) DEFAULT NULL,
   `pwd` varchar(20) DEFAULT NULL,
+  `url` varchar(200) DEFAULT NULL COMMENT '图片在服务器上的地址',
   `status` varchar(50) DEFAULT NULL,
+  `libraryCard` varchar(50) DEFAULT NULL COMMENT '借书证号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_reader
 -- ----------------------------
-INSERT INTO `tb_reader` VALUES ('1', 'wgh', '男', '2008010100001', '的', '1980-07-17', '身份证', '2201041980********', '13634*******', 'wgh717@****.com', '2007-11-22', 'tsoft', '的', '1', '1234', null);
-INSERT INTO `tb_reader` VALUES ('2', '的', '女', '123123123', '的', '1983-02-22', '身份证', '220', '', '', '2007-12-29', 'tsoft', '', '2', '1234', null);
+INSERT INTO `tb_reader` VALUES ('1', 'wgh', '男', '2008010100001', '的', '1980-07-17', '身份证', '2201041980********', '17865345674', 'wgh717@163.com', '2007-11-22', 'tsoft', '的', '1', '123', null, '1', '465823947640');
+INSERT INTO `tb_reader` VALUES ('5', 'lucy', '女', '591347167323', null, '2000-12-10', '身份证', '291826200012109837', '18767568735', 'lucy@163.com', '2018-12-19', null, '', '1', '1234', null, '1', '218966913541');
 
 -- ----------------------------
 -- Table structure for tb_readertype
@@ -318,4 +297,4 @@ CREATE TABLE `tb_readertype` (
 -- ----------------------------
 INSERT INTO `tb_readertype` VALUES ('1', '学生', '15');
 INSERT INTO `tb_readertype` VALUES ('2', '教师', '20');
-INSERT INTO `tb_readertype` VALUES ('3', '其他', '5');
+INSERT INTO `tb_readertype` VALUES ('3', '其他', '6');
