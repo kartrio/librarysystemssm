@@ -141,7 +141,7 @@
 					</div>
 					<div align="center" style="margin-top: 10px; cursor: pointer;">
 						<a class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'"
-						 onclick="addTab('borrowInfoPage?source=1','借阅到期提醒')">借阅到期提醒</a>
+						 onclick="addTab('dueToRemind','借阅到期提醒')">借阅到期提醒</a>
 					</div>
 				</div>
 			</c:if>

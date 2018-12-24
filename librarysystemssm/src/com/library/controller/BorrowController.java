@@ -16,6 +16,7 @@ import com.library.model.BorrowInfo;
 import com.library.service.BookInfoService;
 import com.library.service.BorrowInfoService;
 import com.library.util.DateUtil;
+import com.library.util.SendEmailUtil;
 
 @Controller
 public class BorrowController {
@@ -45,6 +46,18 @@ public class BorrowController {
 	@RequestMapping("/findAllBorrowBookInfo")
 	public String findAllBorrowBookInfo() {
 		return "borrow/findAllBorrowBookInfo";
+	}
+	
+	/**
+	 * 跳转到借阅到期提醒页面
+	 * 离归还时间还有5天时进行提醒
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/dueToRemind")
+	public String dueToRemind(Model model) {
+		model.addAttribute("toTime", DateUtil.dateToStr(DateUtil.addDays(new Date(), 5)));
+		return "borrow/dueToRemind";
 	}
 
 	/**
@@ -152,5 +165,24 @@ public class BorrowController {
 		delMap.put("del", 1);
 		bookInfoService.editBookInfo(delMap);
 		return "redirect:findBookInfo?del=0&page=" + page + "&rows=" + rows;
+	}
+	
+    /**
+     * 提醒归还书籍
+	 * 1.通过调用SMS的接口可以进行短信提醒
+	 * 2.可以通过发送邮件的方式提醒
+     * @param readerName
+     * @param email
+     * @param page
+     * @param rows
+     * @return
+     */
+	@RequestMapping("/remindGiveBack")
+	public String remindGiveBack(String readerName,String email, Integer page, Integer rows){
+		String str = DateUtil.dateToStr(DateUtil.addDays(new Date(), 5));
+		String subject = "书籍归还提醒";
+		String content = readerName + ",您有书籍5天之后需要归还！";
+		SendEmailUtil.sendEmail(email, content, subject);
+		return "redirect:findBorrowInfo?toTime=" + str + "&ifback=0&page=" + page + "&rows=" + rows;
 	}
 }

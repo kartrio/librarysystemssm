@@ -1,5 +1,6 @@
 package com.library.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,5 +23,19 @@ public class DateUtil {
 		cal.setTime(date);
 		cal.add(Calendar.DATE, days);
 		return new Date(cal.getTimeInMillis());
+	}
+	
+	/**
+	 * 将日期转换为字符串
+	 * @param date
+	 * @return
+	 */
+	public static String dateToStr(Date date){
+		String str = "";
+		if(date != null){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		 	str = sdf.format(date);
+		}
+		return str;
 	}
 }

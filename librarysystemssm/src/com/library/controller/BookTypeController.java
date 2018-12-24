@@ -19,6 +19,10 @@ public class BookTypeController {
 	@Autowired
 	private BookTypeService bookTypeService;
 	
+	/**
+	 * 跳转到图书类别页面
+	 * @return
+	 */
 	@RequestMapping("/bookTypePage")
 	public String bookTypePage() {
 		return "book/findBookType";
@@ -55,18 +59,39 @@ public class BookTypeController {
 		return bookTypes;
 	}
 	
+	/**
+	 * 新增图书类别
+	 * @param bookType
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@RequestMapping("/addBookType")
 	public String addBookType(BookType bookType, Integer page, Integer rows){
 		bookTypeService.addBookType(bookType);
 		return "redirect:findBookType?page=" + page + "&rows=" + rows;
 	}
 	
+	/**
+	 * 修改图书类别
+	 * @param bookType
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@RequestMapping("/editBookType")
 	public String editBookType(BookType bookType, Integer page, Integer rows){
 		bookTypeService.editBookType(bookType);
 		return "redirect:findBookType?page=" + page + "&rows=" + rows;
 	}
 	
+	/**
+	 * 删除图书类别
+	 * @param id
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@RequestMapping("/deleteBookType")
 	public String deleteBookType(int id, Integer page, Integer rows){
 		bookTypeService.deleteBookType(id);

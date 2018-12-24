@@ -18,6 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<id property="id" column="readerid" />
 			<id property="barcode" column="readerBarcode"/>
 			<result property="name" column="rname" />
+			<result property="tel" column="rtel" />
+			<result property="email" column="remail" />
 		</association>
 
 		<!-- 与BookInfo建立关联 -->
@@ -40,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 分页查询所有具有指定条件的借阅信息 ,参数类型为map -->
 	<select id="getBorrowInfo" resultMap="borrowInfoMap">
-		SELECT bo.*,r.barcode readerBarcode, r.name rname ,
+		SELECT bo.*,r.barcode readerBarcode, r.name rname , r.tel rtel,r.email remail,
 		bi.barcode bookBarcode, bookname,bi.ISBN bIsbn, pubname,bookcase,bc.name bcname
 		FROM tb_borrow bo
 		LEFT JOIN tb_reader r ON bo.readerid = r.id
@@ -59,6 +61,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="fromTime != null and toTime != null and fromTime != '' and toTime != ''">
 			    AND borrowTime BETWEEN #{fromTime} AND #{toTime}
+			</if>
+			<if test="fromTime == null or fromTime == ''">
+			    <if test="toTime != null and  toTime != ''">
+			       AND backTime = #{toTime}
+			    </if>
 			</if>
 			<if test="status != null">
 			    <if test="status == 1">
@@ -92,6 +99,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="fromTime != null and toTime != null and fromTime != '' and toTime != ''">
 			    AND borrowTime BETWEEN #{fromTime} AND #{toTime}
+			</if>
+			<if test="fromTime == null or fromTime == ''">
+			    <if test="toTime != null and  toTime != ''">
+			       AND backTime = #{toTime}
+			    </if>
 			</if>
 			<if test="status != null">
 				 <if test="status == 1">
