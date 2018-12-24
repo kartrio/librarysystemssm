@@ -22,8 +22,8 @@ import javax.mail.internet.MimeMultipart;
  */
 public class SendEmailUtil {
 	private final static String HOST = "smtp.163.com"; // POP3服务器
-	private final static String FROM = "18252588953@163.com"; // 发件人
-	private final static String PASSWORD = "zgs285639784";// 发件人密码
+	private final static String FROM = "账号"; // 发件人
+	private final static String PASSWORD = "密码";// 发件人密码
 
 	/**
 	 * 不带附件的邮件发送方式
