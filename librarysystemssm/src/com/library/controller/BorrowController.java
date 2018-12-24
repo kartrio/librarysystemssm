@@ -27,6 +27,10 @@ public class BorrowController {
 	@Autowired
 	private BookInfoService bookInfoService;
 
+	/**
+	 * 跳转到借阅书籍页面
+	 * @return
+	 */
 	@RequestMapping("/borrowBookPage")
 	public String borrowBookPage() {
 		return "borrow/borrowBook";
